@@ -175,7 +175,7 @@ def get_12ECG_features(data, header_data):
     mean_Peaks = np.mean(peaks*gain_lead[0])
 
 #   median
-    median_RR = np.median(idx/sample_Fs*1000)
+    median_RR = 0
     median_Peaks = np.median(peaks*gain_lead[0])
 
 #   standard deviation
