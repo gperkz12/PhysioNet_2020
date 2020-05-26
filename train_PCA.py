@@ -36,15 +36,15 @@ X_pca_train = pca.transform(X_std_train)
 # print(pca.singular_values_)
 
 
-def get_pca_feature(sc, pca, X_test):
-
-    print(sc, pca)
-    X_std_test = sc.transform(X_test)
-    X_pca_test = pca.transform(X_std_test)
-
-    print(X_std_test)
-    print(X_pca_test)
-
-    return X_pca_test
-    # load sc and pca
-    # takes in X_test and then it does line 23 but test and line 27 but test
+# def get_pca_feature():
+#
+#     print(sc, pca)
+#     X_std_test = sc.transform(X_test)
+#     X_pca_test = pca.transform(X_std_test)
+#
+#     print(X_std_test)
+#     print(X_pca_test)
+#
+#     return X_pca_test
+#     load sc and pca
+#     takes in X_test and then it does line 23 but test and line 27 but test
