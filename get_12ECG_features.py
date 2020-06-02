@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import numpy as np
-import train_PCA
+import scipy.io as sio
 from scipy.signal import butter, lfilter
 from scipy import stats
 
@@ -198,8 +198,9 @@ def get_12ECG_features(data, header_data):
 #   Add more features: PCA and Sparse Coding
 
 #   PCA
-    X_std_test = train_PCA.sc.transform(train_PCA.X_test)
-    X_pca_test = train_PCA.transform(X_std_test)
+    load sc.mat
+    X_std_test = sc.transform(train_PCA.X_test)
+    X_pca_test = transform(X_std_test)
 
 
 

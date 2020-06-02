@@ -1,6 +1,7 @@
 import numpy as np
+import scipy.io as sio
 from sklearn.decomposition import PCA
-from sklearn import  decomposition, datasets
+from sklearn import decomposition, datasets
 from sklearn.preprocessing import StandardScaler
 
 iris = datasets.load_iris()
@@ -24,6 +25,13 @@ X_std_train = sc.transform(X_train)
 pca = PCA(n_components=2)
 pca.fit(X_std_train)
 X_pca_train = pca.transform(X_std_train)
+
+print(pca)
+
+sio.savemat('PhysioNet_2020/sc.mat', {'sc': sc})
+#sio.savemat('PhysioNet_2020/pca.mat', {'pca': pca})
+
+
 
 # print(X_pca_train)
 #
