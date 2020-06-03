@@ -9,18 +9,20 @@ X = iris.data
 
 #uses the dictionary learning class to transform the data
 
-atoms = DictionaryLearning(None, 1, 1000, 1e-08, 'lars', 'omp', None, None, None, None, None, False, False, None, False, False)
+atoms = DictionaryLearning(n_components=10, alpha=5, max_iter=500, transform_n_nonzero_coefs=2, transform_alpha=5)
 
 #fit the data
-atoms.fit(X, None)
+atoms.fit(X)
 
 #fit the transform data
-atoms.fit_transform(X, None)
+atoms.fit_transform(X)
 
 #transform the data
 xNew = atoms.transform(X)
 
 #print the new sparse data
+print(xNew.shape)
 print(xNew)
+print(atoms.components_)
 
 
