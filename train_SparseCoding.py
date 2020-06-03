@@ -22,8 +22,9 @@ atoms = DictionaryLearning(None, 1, 1000, 1e-08, 'lars', 'omp', None, None, None
 
 #fit and transform data
 
-sparsedata = atoms.fit_transform(X_test, None)
+traindata = atoms.fit_transform(X_train, None)
 
-#print the new sparse data
-print(X.shape, sparsedata.shape)
-print(sparsedata)
+testdata = atoms.fit_transform(X_test, None)
+
+"""print(traindata, "\n")
+print(testdata)"""
