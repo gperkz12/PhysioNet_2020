@@ -22,14 +22,18 @@ sc = StandardScaler()
 sc.fit(X_train)
 X_std_train = sc.transform(X_train)
 
+print(X_std_train)
+
 pca = PCA(n_components=2)
 pca.fit(X_std_train)
 X_pca_train = pca.transform(X_std_train)
 
+print(X_pca_train)
+
 print(pca)
 
-sio.savemat('PhysioNet_2020/sc.mat', {'sc': sc})
-#sio.savemat('PhysioNet_2020/pca.mat', {'pca': pca})
+sio.savemat('./sc.mat', {'sc': sc})
+#sio.savemat('./pca.mat', {'pca': pca})
 
 
 
