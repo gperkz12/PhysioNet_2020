@@ -202,6 +202,8 @@ def get_12ECG_features(data, header_data):
     X_std_test = sc.transform(train_PCA.X_test)
     X_pca_test = transform(X_std_test)
 
+# Sparse Coding
+# test
 
 
     features = np.hstack([age,sex,mean_RR,mean_Peaks,median_RR,median_Peaks,std_RR,std_Peaks,var_RR,var_Peaks,skew_RR,skew_Peaks,kurt_RR,kurt_Peaks,X_pca_test])
