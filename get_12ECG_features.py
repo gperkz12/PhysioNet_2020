@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import numpy as np
+import scipy.io as sio
 from scipy.signal import butter, lfilter
 from scipy import stats
 
@@ -194,9 +195,16 @@ def get_12ECG_features(data, header_data):
     kurt_RR = stats.kurtosis(idx/sample_Fs*1000)
     kurt_Peaks = stats.kurtosis(peaks*gain_lead[0])
 
-# Add more features: PCA and Sparse Coding
+#   Add more features: PCA and Sparse Coding
 
-    features = np.hstack([age,sex,mean_RR,mean_Peaks,median_RR,median_Peaks,std_RR,std_Peaks,var_RR,var_Peaks,skew_RR,skew_Peaks,kurt_RR,kurt_Peaks])
+#   PCA
+    load sc.mat
+    X_std_test = sc.transform(train_PCA.X_test)
+    X_pca_test = transform(X_std_test)
+
+
+
+    features = np.hstack([age,sex,mean_RR,mean_Peaks,median_RR,median_Peaks,std_RR,std_Peaks,var_RR,var_Peaks,skew_RR,skew_Peaks,kurt_RR,kurt_Peaks,X_pca_test])
 
   
     return features
