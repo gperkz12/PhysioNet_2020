@@ -7,27 +7,20 @@ from sklearn import datasets
 iris = datasets.load_iris()
 X = iris.data
 
-#uses the dictionatry learning function to transform the data
-#atoms = dict_learning(X, 4, 1, 100, 1e-8, 'lars', None, None, None, None, False, None, False, False, False)
+#uses the dictionary learning class to transform the data
 
 atoms = DictionaryLearning(None, 1, 1000, 1e-08, 'lars', 'omp', None, None, None, None, None, False, False, None, False, False)
 
-
-
-
-
-#print the sparse data
-
+#fit the data
 atoms.fit(X, None)
 
+#fit the transform data
 atoms.fit_transform(X, None)
 
-params = atoms.get_params(True)
-
-atoms.set_params()
-
+#transform the data
 xNew = atoms.transform(X)
 
+#print the new sparse data
 print(xNew)
 
 
