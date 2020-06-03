@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="d6f8c80e-c348-49f1-ba6e-0f2da8c4b5ef" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sparse_coder.py" beforeDir="false" afterPath="$PROJECT_DIR$/sparse_coder.py" afterDir="false" />
@@ -9,6 +10,13 @@
     <list default="true" id="f220e2c9-b9e9-4b2d-9d99-3655b34be2f2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 >>>>>>> PCA
+=======
+    <list default="true" id="f220e2c9-b9e9-4b2d-9d99-3655b34be2f2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/train_SparseCoding.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get_12ECG_features.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_12ECG_features.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_PCA.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_PCA.py" afterDir="false" />
+>>>>>>> master
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,9 +24,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="FavoritesManager">
     <favorites_list name="PhysioNet_2020" />
 =======
+=======
+>>>>>>> master
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/PhysioNet_2020$PhysioNet_2020.coverage" NAME="PhysioNet_2020 Coverage Results" MODIFIED="1590080708402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/PhysioNet_2020$run_12ECG_classifier.coverage" NAME="run_12ECG_classifier Coverage Results" MODIFIED="1590100175034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
@@ -88,7 +99,10 @@
         </entry>
       </file>
     </leaf>
+<<<<<<< HEAD
 >>>>>>> PCA
+=======
+>>>>>>> master
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -102,12 +116,15 @@
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
     <exe-path />
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
 =======
+=======
+>>>>>>> master
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -125,20 +142,29 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< HEAD
     <option name="x" value="3232" />
     <option name="y" value="566" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
 >>>>>>> PCA
+=======
+    <option name="x" value="250" />
+    <option name="y" value="-8" />
+    <option name="width" value="258" />
+    <option name="height" value="110" />
+>>>>>>> master
   </component>
-  <component name="ProjectId" id="1c8RtlAOrfvsGO6hoQwrqiG73IX" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+<<<<<<< HEAD
 <<<<<<< HEAD
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
 =======
+=======
+>>>>>>> master
   <component name="ProjectView">
     <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -172,7 +198,10 @@
         </subPane>
       </pane>
     </panes>
+<<<<<<< HEAD
 >>>>>>> PCA
+=======
+>>>>>>> master
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -481,7 +510,10 @@
     <servers />
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> master
   <component name="TodoView">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
@@ -518,7 +550,10 @@
       <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
+<<<<<<< HEAD
 >>>>>>> PCA
+=======
+>>>>>>> master
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -528,6 +563,7 @@
     <MESSAGE value="continued working on sparse coding" />
     <option name="LAST_COMMIT_MESSAGE" value="continued working on sparse coding" />
   </component>
+<<<<<<< HEAD
   <component name="WindowStateProjectService">
     <state x="450" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590694386759">
       <screen x="0" y="0" width="1536" height="824" />
@@ -616,6 +652,8 @@
     <SUITE FILE_PATH="coverage/PhysioNet_2020$pca_practice.coverage" NAME="pca_practice Coverage Results" MODIFIED="1590512329684" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PhysioNet_2020$sparse_coder.coverage" NAME="sparse_coder Coverage Results" MODIFIED="1591211388445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
 =======
+=======
+>>>>>>> master
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
@@ -678,6 +716,26 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
 >>>>>>> PCA
+=======
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PhysioNet_2020$train_PCA.coverage" NAME="train_PCA Coverage Results" MODIFIED="1590514241154" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PhysioNet_2020$driver.coverage" NAME="driver Coverage Results" MODIFIED="1590446627204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PhysioNet_2020$pca_practice.coverage" NAME="pca_practice Coverage Results" MODIFIED="1590512329684" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PhysioNet_2020$sparse_coder.coverage" NAME="sparse_coder Coverage Results" MODIFIED="1591211388445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+>>>>>>> master
   </component>
 </project>
