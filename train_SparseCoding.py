@@ -22,9 +22,11 @@ atoms = DictionaryLearning(None, 1, 1000, 1e-08, 'lars', 'omp', None, None, None
 
 #fit and transform data
 
-traindata = atoms.fit_transform(X_train, None)
+atoms.fit(X_train)
 
-testdata = atoms.fit_transform(X_test, None)
+traindata = atoms.transform(X_train)
+
+testdata = atoms.transform(X_test)
 
 """print(traindata, "\n")
 print(testdata)"""
