@@ -8,6 +8,11 @@ from sklearn import datasets
 iris = datasets.load_iris()
 X = iris.data
 
+def save_object(obj, filename):
+    with open(filename, 'wb') as output:  # Overwrites any existing file.
+        pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
+
+
 rnd_index = np.random.permutation(X.shape[0])
 num_test = round(X.shape[0] * 0.2)
 test_index = rnd_index[0:num_test]
@@ -28,5 +33,4 @@ traindata = atoms.fit_transform(X_train, None)
 
 testdata = atoms.fit_transform(X_test, None)
 
-"""print(traindata, "\n")
-print(testdata)"""
+save_object(atoms, 'PhysioNet_2020/pca.pkl')
