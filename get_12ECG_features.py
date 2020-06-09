@@ -200,7 +200,6 @@ def get_12ECG_features(data, header_data):
 
 #   PCA
     # Load up  X_test, pca and sc
-    X_test = pk.load("X_test", 'rb')
     pca = pk.load(open("pca.pkl", 'rb'))
     sc = pk.load(open("sc.pkl", 'rb'))
 

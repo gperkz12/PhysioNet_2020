@@ -32,8 +32,6 @@ pca = PCA(n_components=2)
 pca.fit(X_std_train)
 X_pca_train = pca.transform(X_std_train)
 
-# Save X_test as a pickle file for use in get_12ECG_features
-save_object(X_test, 'PhysioNet_2020/X_test.pkl')
 # Save sc as a pickle file for use in get_12ECG_features
 save_object(sc, 'PhysioNet_2020/sc.pkl')
 # Save pca as a pickle file for use in get_12ECG_features
