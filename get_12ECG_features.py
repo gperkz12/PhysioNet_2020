@@ -2,6 +2,7 @@
 
 import numpy as np
 import scipy.io as sio
+import pickle as pk
 from scipy.signal import butter, lfilter
 from scipy import stats
 
@@ -198,9 +199,14 @@ def get_12ECG_features(data, header_data):
 #   Add more features: PCA and Sparse Coding
 
 #   PCA
-    load sc.mat
-    X_std_test = sc.transform(train_PCA.X_test)
-    X_pca_test = transform(X_std_test)
+    # Load up  X_test, pca and sc
+    X_test = pk.load("X_test", 'rb')
+    pca = pk.load(open("pca.pkl", 'rb'))
+    sc = pk.load(open("sc.pkl", 'rb'))
+
+    # Implement the testing
+    X_std_test = sc.transform(X_test)
+    X_pca_test = pca.transform(X_std_test)
 
 
 

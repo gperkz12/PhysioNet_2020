@@ -1,13 +1,19 @@
 import numpy as np
 import scipy.io as sio
+import pickle as pk
 from sklearn.decomposition import PCA
 from sklearn import decomposition, datasets
 from sklearn.preprocessing import StandardScaler
 
+
+def save_object(obj, filename):
+    with open(filename, 'wb') as output:  # Overwrites any existing file.
+        pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
+
+
 iris = datasets.load_iris()
 X = iris.data
-# print(X.shape)
-
+# Take a random dataset to form the test and train
 rnd_index = np.random.permutation(X.shape[0])
 num_test = round(X.shape[0] * 0.2)
 test_index = rnd_index[0:num_test]
@@ -26,10 +32,21 @@ pca = PCA(n_components=2)
 pca.fit(X_std_train)
 X_pca_train = pca.transform(X_std_train)
 
-print(pca)
+# Save X_test as a pickle file for use in get_12ECG_features
+save_object(X_test, 'PhysioNet_2020/X_test.pkl')
+# Save sc as a pickle file for use in get_12ECG_features
+save_object(sc, 'PhysioNet_2020/sc.pkl')
+# Save pca as a pickle file for use in get_12ECG_features
+save_object(pca, 'PhysioNet_2020/pca.pkl')
 
-sio.savemat('PhysioNet_2020/sc.mat', {'sc': sc})
+
+
+# Save sc as a matlab file for use in get_12ECG_features
+#sio.savemat('PhysioNet_2020/sc.mat', {'sc': sc})
 #sio.savemat('PhysioNet_2020/pca.mat', {'pca': pca})
+#json.dumps(pca)
+#pk.dump(pca, open("pca.pkl""))
+
 
 
 
