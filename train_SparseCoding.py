@@ -35,4 +35,4 @@ traindata = atoms.transform(X_train)
 
 testdata = atoms.transform(X_test)
 
-save_object(atoms, 'PhysioNet_2020/pca.pkl')
+save_object(atoms, 'PhysioNet_2020/atoms.pkl')
