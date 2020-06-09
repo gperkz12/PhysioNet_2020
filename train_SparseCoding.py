@@ -1,5 +1,6 @@
 
 import numpy as np
+import pickle as pk
 from sklearn.decomposition import DictionaryLearning
 from sklearn import datasets
 
@@ -18,7 +19,8 @@ X_test = X[test_index][:]
 
 #uses the dictionary learning class to transform the data
 
-atoms = DictionaryLearning(None, 1, 1000, 1e-08, 'lars', 'omp', None, None, None, None, None, False, False, None, False, False)
+atoms = DictionaryLearning(None, 1, 1000, 1e-08, 'lars', 'omp', None, None, None, None, None, False, False, None, False,
+                           False)
 
 #fit and transform data
 
