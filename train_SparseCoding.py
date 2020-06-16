@@ -1,4 +1,3 @@
-
 import numpy as np
 import pickle as pk
 from sklearn.decomposition import DictionaryLearning
@@ -35,4 +34,5 @@ traindata = atoms.transform(X_train)
 
 testdata = atoms.transform(X_test)
 
+# Pickle atoms
 save_object(atoms, 'PhysioNet_2020/atoms.pkl')

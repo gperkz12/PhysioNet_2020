@@ -11,7 +11,7 @@ def save_object(obj, filename):
 
 
 
-def get_12ECG_features(data, header_data):
+def get_all_features(data, header_data):
     tmp_hea = header_data[0].split(' ')
     ptID = tmp_hea[0]
     num_leads = int(tmp_hea[1])
@@ -64,9 +64,11 @@ def get_12ECG_features(data, header_data):
     kurt_RR = stats.kurtosis(idx / sample_Fs * 1000)
     kurt_Peaks = stats.kurtosis(peaks * gain_lead[0])
 
+# Need to pickle the features here
 
-    features = np.hstack(
-        [age, sex, mean_RR, mean_Peaks, median_RR, median_Peaks, std_RR, std_Peaks, var_RR, var_Peaks, skew_RR,
-         skew_Peaks, kurt_RR, kurt_Peaks])
+def get_file_features():
 
-    return features
+
+
+
+    save_object(features, "features.pkl")

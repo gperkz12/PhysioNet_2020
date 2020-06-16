@@ -198,8 +198,8 @@ def get_12ECG_features(data, header_data):
 
 #   Add more features: PCA and Sparse Coding
 
-#   PCA
-    # Load up  X_test, pca and sc
+# PCA
+    # Load up pca and sc
     pca = pk.load(open("pca.pkl", 'rb'))
     sc = pk.load(open("sc.pkl", 'rb'))
 
@@ -207,9 +207,16 @@ def get_12ECG_features(data, header_data):
     X_std_test = sc.transform(X_test)
     X_pca_test = pca.transform(X_std_test)
 
+# Sparse Coding
+    # Load up atoms
+    atoms = pk.load(open("atoms.pkl", 'rb'))
+
+    # Implement the testing
+    X_sparse_test = atoms.transfrom(X_test)
 
 
-    features = np.hstack([age,sex,mean_RR,mean_Peaks,median_RR,median_Peaks,std_RR,std_Peaks,var_RR,var_Peaks,skew_RR,skew_Peaks,kurt_RR,kurt_Peaks,X_pca_test])
+
+    features = np.hstack([age,sex,mean_RR,mean_Peaks,median_RR,median_Peaks,std_RR,std_Peaks,var_RR,var_Peaks,skew_RR,skew_Peaks,kurt_RR,kurt_Peaks,X_pca_test, X_sparse_test])
 
   
     return features
