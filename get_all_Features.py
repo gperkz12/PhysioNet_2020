@@ -10,7 +10,14 @@ def save_object(obj, filename):
         pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
 
 
+def get_all_features
+    read_dir(traindata)
+    for all_filenames
+        curfile = all_filenames(i)
+        [data, headerdata] = load(curfile)
+        F[i] = get_all_features(data, headerdata)
 
+        
 def get_12ECG_features(data, header_data):
     tmp_hea = header_data[0].split(' ')
     ptID = tmp_hea[0]
