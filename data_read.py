@@ -40,6 +40,7 @@ def data_files_load(input_directory,input_files = '',mapping_labels = False):
     del input_files
     
     list_data = []
+    list_header = []
     list_label = []
 
     for ii in range(len(input_files_pth)):
@@ -72,6 +73,7 @@ def data_files_load(input_directory,input_files = '',mapping_labels = False):
                 label = label.replace(key, value)
 
         list_data.append(data)
+        list_header.append(header_data)
         list_label.append(label)
 
-    return list_data,list_label
+    return list_data,list_header,list_label
