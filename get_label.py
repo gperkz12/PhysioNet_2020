@@ -1,10 +1,9 @@
 import csv
 import os
 
-#FINDING THE PATH TO THE CSV FILE
-path = os.path.abspath("DATA\\REFERENCE.csv")
-
 def getLabel(filestr):
+#FINDING THE PATH TO THE CSV FILE
+    path = os.path.abspath("DATA\\REFERENCE.csv")
 
 #FINDING THE INDEX
     filestr = filestr.replace("A"," ")             #takes the input and removes the A char
@@ -19,10 +18,10 @@ def getLabel(filestr):
 
 
 #CODE TO TEST THE FUNCTION
-"""test1 = getLabel("A0001")
+"""test1 = getLabel('A0001')
 print(test1)
 
-test2 = getLabel("A0043")
+test2 = getLabel('A0043')
 print(test2)"""
 
 
