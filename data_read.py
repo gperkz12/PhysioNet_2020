@@ -50,7 +50,7 @@ def data_files_load(input_directory,input_files = '',mapping_labels = False):
 
         #------------------------------------------------------------
         # Extracting label from header data
-        #--------------------------------------------------------------
+        #------------------------------------------------------------
         for iline in header_data:
             if iline.startswith('#Age'):
                 tmp_age = iline.split(': ')[1].strip()
