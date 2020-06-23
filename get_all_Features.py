@@ -17,12 +17,12 @@ def save_object(obj, filename):
 def get_all_features(data, header_data):
     i = 0
     traindata = 'DATA\TrainData_Classifier'
-    data_read.data_files_list(traindata)
     for all_filenames in traindata:
+        data_read.data_files_list(traindata)
         curfile = all_filenames(i)
         [data, header_data] = data_read.data_files_load(curfile)
         F[i] = get_file_features(data, header_data)
-        data_read(traindata, header_data)
+        #data_read(traindata, header_data)
         pca_data[i] = F[i]
     save_object(pca_data, pca_data.pkl)
 
