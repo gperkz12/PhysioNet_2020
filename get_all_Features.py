@@ -6,29 +6,24 @@ import data_read
 from scipy.signal import butter, lfilter
 from scipy import stats
 
-
-# For pickling
-def save_object(obj, filename):
-    with open(filename, 'wb') as output:  # Overwrites any existing file.
-        pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
-
 # data files load
 
 def get_all_features(data, header_data):
-    i = 0
-    traindata = 'DATA\TrainData_Classifier'
-    for all_filenames in traindata:
-        data_read.data_files_list(traindata)
-        curfile = all_filenames(i)
+    pca_data = []
+    traindata = 'DATA\TrainData_FeatureExtraction'
+    print(traindata)
+    trainfiles = data_read.data_files_list(traindata)
+    print(trainfiles)
+    for curfile in trainfiles:
         [data, header_data] = data_read.data_files_load(curfile)
-        F[i] = get_file_features(data, header_data)
-        #data_read(traindata, header_data)
-        pca_data[i] = F[i]
-    save_object(pca_data, pca_data.pkl)
+        curfeatures = get_file_features(data, header_data)
+        pca_data = np.vstack(pca_data, curfeatures)
 
+    print(pca_data)
+    save_object(pca_data, 'PhysioNet_2020\pca_data.pkl')\
 
+    return 0
 
-        
 
 def get_file_features(data, header_data):
     tmp_hea = header_data[0].split(' ')
@@ -68,4 +63,13 @@ def get_file_features(data, header_data):
     kurt_RR = stats.kurtosis(idx / sample_Fs * 1000)
     kurt_Peaks = stats.kurtosis(peaks * gain_lead[0])
 
-# Need to pickle the features here
+    features = np.hstack([mean_RR,mean_Peaks,median_RR,median_Peaks,std_RR,std_Peaks,var_RR,var_Peaks,skew_RR,skew_Peaks,kurt_RR,kurt_Peaks])
+
+    print(features)
+    return features
+
+
+# For pickling
+def save_object(obj, filename):
+    with open(filename, 'wb') as output:  # Overwrites any existing file.
+        pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
