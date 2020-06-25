@@ -6,21 +6,19 @@ import data_read
 from scipy.signal import butter, lfilter
 from scipy import stats
 
-# data files load
-
-def get_all_features(data, header_data):
-    pca_data = []
+def get_all_features():
     traindata = 'DATA\TrainData_FeatureExtraction'
-    print(traindata)
-    trainfiles = data_read.data_files_list(traindata)
-    print(trainfiles)
-    for curfile in trainfiles:
-        [data, header_data] = data_read.data_files_load(curfile)
-        curfeatures = get_file_features(data, header_data)
-        pca_data = np.vstack(pca_data, curfeatures)
+    [data, header_data, BAD_LABELS] = data_read.data_files_load(traindata)
+    for i in range(0, (len(data))):
+        curfeatures = get_file_features(data[i], header_data[i])
+        if i == 0:
+            pca_data = curfeatures
+        else:
+            tmp = np.column_stack((pca_data, curfeatures))
+            pca_data = tmp
 
-    print(pca_data)
-    save_object(pca_data, 'PhysioNet_2020\pca_data.pkl')\
+    print(pca_data.shape)
+    save_object(pca_data, '.\pca_data.pkl')
 
     return 0
 
@@ -65,7 +63,6 @@ def get_file_features(data, header_data):
 
     features = np.hstack([mean_RR,mean_Peaks,median_RR,median_Peaks,std_RR,std_Peaks,var_RR,var_Peaks,skew_RR,skew_Peaks,kurt_RR,kurt_Peaks])
 
-    print(features)
     return features
 
 
