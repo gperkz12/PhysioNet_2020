@@ -6,16 +6,13 @@ import data_read
 from scipy.signal import butter, lfilter
 from scipy import stats
 
-<<<<<<< Updated upstream
 def get_all_features():
-=======
 # data files load
 
 def get_all_features(data, header_data):
     print(header_data)
     print(data)
     pca_data = []
->>>>>>> Stashed changes
     traindata = 'DATA\TrainData_FeatureExtraction'
     [data, header_data, BAD_LABELS] = data_read.data_files_load(traindata)
     for i in range(0, (len(data))):
@@ -44,7 +41,7 @@ def get_file_features(data, header_data):
     for ii in range(num_leads):
         tmp_hea = header_data[ii + 1].split(' ')
         gain_lead[ii] = int(tmp_hea[2].split('/')[0])
-    for i in data:
+    for i in range(0, (len(data))):
         #   We are only using data from lead1
         peaks, idx = get_12ECG_features.detect_peaks(data[i], sample_Fs, gain_lead[0])
 
@@ -72,18 +69,16 @@ def get_file_features(data, header_data):
         kurt_RR = stats.kurtosis(idx / sample_Fs * 1000)
         kurt_Peaks = stats.kurtosis(peaks * gain_lead[0])
 
-        features = np.hstack([mean_RR,mean_Peaks,median_RR,median_Peaks,std_RR,std_Peaks,var_RR,var_Peaks,skew_RR,skew_Peaks,kurt_RR,kurt_Peaks])
+        curfeatures = np.hstack([mean_RR,mean_Peaks,median_RR,median_Peaks,std_RR,std_Peaks,var_RR,var_Peaks,skew_RR,skew_Peaks,kurt_RR,kurt_Peaks])
+        if i == 0:
+            lead_features = np.vstack()
+        else:
+            tmp = np.column_stack((lead_features, curfeatures))
+            lead_features = tmp
 
-<<<<<<< Updated upstream
-    features = np.hstack([mean_RR,mean_Peaks,median_RR,median_Peaks,std_RR,std_Peaks,var_RR,var_Peaks,skew_RR,skew_Peaks,kurt_RR,kurt_Peaks])
-
-    return features
-=======
         print(features)
         ++i
-        return features
->>>>>>> Stashed changes
-
+        return (features)
 
 # For pickling
 def save_object(obj, filename):
