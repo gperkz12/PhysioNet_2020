@@ -6,7 +6,6 @@ import data_read
 from scipy.signal import butter, lfilter
 from scipy import stats
 
-def get_all_features():
 # data files load
 
 def get_all_features(data, header_data):
@@ -22,9 +21,8 @@ def get_all_features(data, header_data):
         else:
             tmp = np.column_stack((pca_data, curfeatures))
             pca_data = tmp
-
     print(pca_data.shape)
-    save_object(pca_data, '.\pca_data.pkl')
+    save_object(pca_data, 'PhysioNet_2020\pca_data.pkl')
 
     return 0
 
@@ -41,44 +39,43 @@ def get_file_features(data, header_data):
     for ii in range(num_leads):
         tmp_hea = header_data[ii + 1].split(' ')
         gain_lead[ii] = int(tmp_hea[2].split('/')[0])
+
     for i in range(0, (len(data))):
         #   We are only using data from lead1
-        peaks, idx = get_12ECG_features.detect_peaks(data[i], sample_Fs, gain_lead[0])
+        peaks, idx = get_12ECG_features.detect_peaks(data[i], sample_Fs, gain_lead[i])
 
         #   mean
         mean_RR = np.mean(idx / sample_Fs * 1000)
-        mean_Peaks = np.mean(peaks * gain_lead[0])
+        mean_Peaks = np.mean(peaks * gain_lead[i])
 
         #   median
         median_RR = 0
-        median_Peaks = np.median(peaks * gain_lead[0])
+        median_Peaks = np.median(peaks * gain_lead[i])
 
         #   standard deviation
         std_RR = np.std(idx / sample_Fs * 1000)
-        std_Peaks = np.std(peaks * gain_lead[0])
+        std_Peaks = np.std(peaks * gain_lead[i])
 
         #   variance
         var_RR = stats.tvar(idx / sample_Fs * 1000)
-        var_Peaks = stats.tvar(peaks * gain_lead[0])
+        var_Peaks = stats.tvar(peaks * gain_lead[i])
 
         #   Skewness
         skew_RR = stats.skew(idx / sample_Fs * 1000)
-        skew_Peaks = stats.skew(peaks * gain_lead[0])
+        skew_Peaks = stats.skew(peaks * gain_lead[i])
 
         #   Kurtosis
         kurt_RR = stats.kurtosis(idx / sample_Fs * 1000)
-        kurt_Peaks = stats.kurtosis(peaks * gain_lead[0])
+        kurt_Peaks = stats.kurtosis(peaks * gain_lead[i])
 
         curfeatures = np.hstack([mean_RR,mean_Peaks,median_RR,median_Peaks,std_RR,std_Peaks,var_RR,var_Peaks,skew_RR,skew_Peaks,kurt_RR,kurt_Peaks])
+
         if i == 0:
-            lead_features = np.vstack()
+            lead_features = curfeatures
         else:
             tmp = np.column_stack((lead_features, curfeatures))
             lead_features = tmp
-
-        print(features)
-        ++i
-        return (features)
+        return lead_features
 
 # For pickling
 def save_object(obj, filename):
