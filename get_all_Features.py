@@ -8,11 +8,12 @@ from scipy import stats
 
 # data files load
 
+
 def get_all_features(data, header_data):
-    print(header_data)
-    print(data)
+
     pca_data = []
-    traindata = 'DATA\TrainData_FeatureExtraction'
+    traindata = 'PhysioNet_2020\DATA\TrainData_FeatureExtraction'
+    print(traindata)
     [data, header_data, BAD_LABELS] = data_read.data_files_load(traindata)
     for i in range(0, (len(data))):
         curfeatures = get_file_features(data[i], header_data[i])
@@ -21,7 +22,7 @@ def get_all_features(data, header_data):
         else:
             tmp = np.column_stack((pca_data, curfeatures))
             pca_data = tmp
-    print(pca_data.shape)
+    print(pca_data)
     save_object(pca_data, 'PhysioNet_2020\pca_data.pkl')
 
     return 0
@@ -75,6 +76,7 @@ def get_file_features(data, header_data):
         else:
             tmp = np.column_stack((lead_features, curfeatures))
             lead_features = tmp
+        print(lead_features)
         return lead_features
 
 # For pickling
