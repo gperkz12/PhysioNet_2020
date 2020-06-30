@@ -1,10 +1,14 @@
 import numpy as np
 import sys
 from ecgdetectors import Detectors
-from data_read import data_files_load
-from hrv import HRV
+import data_read
+import hrv
 
-[data, header_data] = data_read.data_files_load(curfile)
+curdir = 'DATA\TrainData_FeatureExtraction'
+[all_data, header_data, BAD_LABELS] = data_read.data_files_load(curdir)
+
+data = all_data[0][0]
+print(data.shape)
 
 #Before the detectors can be used the class must first be initalised with the sampling rate of the ECG recording:
 detectors = Detectors(500)
@@ -28,25 +32,25 @@ r_peaks = detectors.swt_detector(data)
 r_peaks = detectors.two_average_detector(data)
 
 #Matched Filter
-r_peaks = detectors.matched_filter_detector(data,template_file)
+#r_peaks = detectors.matched_filter_detector(data,template_file)
 
 #Heart Rate Variability
-HR(rr_samples) #Calculate heart-rates from R peak samples.
+hrv.HR(rr_samples) #Calculate heart-rates from R peak samples.
 
-NN20(self, rr_samples) #Calculate NN20, the number of pairs of successive NNs that differ by more than 20 ms.
+hrv.NN20(self, rr_samples) #Calculate NN20, the number of pairs of successive NNs that differ by more than 20 ms.
 
-NN50(self, rr_samples) #Calculate NN50, the number of pairs of successive NNs that differ by more than 50 ms.
+hrv.NN50(self, rr_samples) #Calculate NN50, the number of pairs of successive NNs that differ by more than 50 ms.
 
-RMSSD(self, rr_samples, False) #Calculate RMSSD (root mean square of successive differences).
+hrv.RMSSD(self, rr_samples, False) #Calculate RMSSD (root mean square of successive differences).
 
-SDANN(self, rr_samples, 5, False) #Calculate SDANN, the standard deviation of the average RR intervals calculated over short periods.
+hrv.SDANN(self, rr_samples, 5, False) #Calculate SDANN, the standard deviation of the average RR intervals calculated over short periods.
 
-SDNN(self, rr_samples, False) #Calculate SDNN, the standard deviation of NN intervals.
+hrv.SDNN(self, rr_samples, False) #Calculate SDNN, the standard deviation of NN intervals.
 
-SDSD(self, rr_samples) #Calculate SDSD, the standard deviation of the successive differences between adjacent NNs.
+hrv.SDSD(self, rr_samples) #Calculate SDSD, the standard deviation of the successive differences between adjacent NNs.
 
-fAnalysis(self, rr_samples) #Frequency analysis to calc self.lf, self.hf, returns the LF/HF-ratio.
+hrv.fAnalysis(self, rr_samples) #Frequency analysis to calc self.lf, self.hf, returns the LF/HF-ratio.
 
-pNN20(self, rr_samples) #Calculate pNN20, the proportion of NN20 divided by total number of NNs.
+hrv.pNN20(self, rr_samples) #Calculate pNN20, the proportion of NN20 divided by total number of NNs.
 
-pNN50(self, rr_samples) #Calculate pNN50, the proportion of NN50 divided by total number of NNs.
+hrv.pNN50(self, rr_samples) #Calculate pNN50, the proportion of NN50 divided by total number of NNs.
