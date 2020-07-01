@@ -2,7 +2,7 @@ import numpy as np
 import sys
 from ecgdetectors import Detectors
 import data_read
-
+from heart_rate_variability import HRV
 
 curdir = 'DATA\TrainData_FeatureExtraction'
 [all_data, header_data, BAD_LABELS] = data_read.data_files_load(curdir)
