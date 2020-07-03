@@ -5,7 +5,8 @@ from scipy.interpolate import interp1d
 from ecgdetectors import Detectors
 import data_read
 import scipy.stats as stats
-from pyhrv.hrv import hrv
+from pyhrv.time_domain import nn20, nn50, sdnn, sdsd, rmssd, hr_parameters
+from  pyhrv.frequency_domain import frequency_domain
 
 
 
@@ -40,26 +41,22 @@ r_peaks = detectors.swt_detector(data)
 #Two Moving Average
 r_peaks = detectors.two_average_detector(data)
 
+
+
 #Matched Filter
 #r_peaks = detectors.matched_filter_detector(data,template_file)
 
-#Heart Rate Variability
-hrv.HR(rr_samples) #Calculate heart-rates from R peak samples.
+#compute and print nn20, nn50, pn20, pn50
+print(nn20(None, r_peaks))
+print(nn50(None, r_peaks))
 
-hrv.NN20(self, rr_samples) #Calculate NN20, the number of pairs of successive NNs that differ by more than 20 ms.
+#compute and print rmssd, sdnn, sdsd, rmssd, hr_parameters
+print(rmssd(None, r_peaks))
+print(sdnn(None, r_peaks))
+print(sdsd(None, r_peaks))
+print(rmssd(None, r_peaks))
+print(hr_parameters(None, r_peaks))
 
-hrv.NN50(self, rr_samples) #Calculate NN50, the number of pairs of successive NNs that differ by more than 50 ms.
+#compute and print a frequency analysis
+print(frequency_domain(None, r_peaks, None, 500))
 
-hrv.RMSSD(self, rr_samples, False) #Calculate RMSSD (root mean square of successive differences).
-
-hrv.SDANN(self, rr_samples, 5, False) #Calculate SDANN, the standard deviation of the average RR intervals calculated over short periods.
-
-hrv.SDNN(self, rr_samples, False) #Calculate SDNN, the standard deviation of NN intervals.
-
-hrv.SDSD(self, rr_samples) #Calculate SDSD, the standard deviation of the successive differences between adjacent NNs.
-
-hrv.fAnalysis(self, rr_samples) #Frequency analysis to calc self.lf, self.hf, returns the LF/HF-ratio.
-
-hrv.pNN20(self, rr_samples) #Calculate pNN20, the proportion of NN20 divided by total number of NNs.
-
-hrv.pNN50(self, rr_samples) #Calculate pNN50, the proportion of NN50 divided by total number of NNs.
