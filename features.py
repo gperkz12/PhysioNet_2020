@@ -1,8 +1,13 @@
+import os
 import numpy as np
 import sys
+from scipy.interpolate import interp1d
 from ecgdetectors import Detectors
 import data_read
-from heart_rate_variability import HRV
+import scipy.stats as stats
+from pyhrv.hrv import hrv
+
+
 
 curdir = 'DATA\TrainData_FeatureExtraction'
 [all_data, header_data, BAD_LABELS] = data_read.data_files_load(curdir)
@@ -10,8 +15,9 @@ curdir = 'DATA\TrainData_FeatureExtraction'
 
 data = all_data[0][0]
 print(data.shape)
-
 print(data)
+
+
 
 #Before the detectors can be used the class must first be initialised with the sampling rate of the ECG recording:
 detectors = Detectors(500)
@@ -36,9 +42,6 @@ r_peaks = detectors.two_average_detector(data)
 
 #Matched Filter
 #r_peaks = detectors.matched_filter_detector(data,template_file)
-
-
-
 
 #Heart Rate Variability
 hrv.HR(rr_samples) #Calculate heart-rates from R peak samples.
