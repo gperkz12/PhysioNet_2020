@@ -11,14 +11,16 @@ def save_object(obj, filename):
         pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
 
 
-iris = datasets.load_iris()
-X = iris.data
+pca_data = pk.load(open("pca_data.pkl", 'rb'))
+
+X = pca_data
 # Take a random dataset to form the test and train
 rnd_index = np.random.permutation(X.shape[0])
 num_test = round(X.shape[0] * 0.2)
 test_index = rnd_index[0:num_test]
 train_index = rnd_index[num_test:]
 
+np.where(X.values >= np.finfo(np.float64).max)
 
 X_train = X[train_index][:]
 X_test = X[test_index][:]
