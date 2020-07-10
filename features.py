@@ -4,7 +4,6 @@ import data_read
 from pyhrv.time_domain import nn20, nn50, sdnn, sdsd, rmssd, hr_parameters
 from pyhrv.frequency_domain import frequency_domain
 from pyhrv.tools import nn_intervals, time_varying, heart_rate_heatplot, plot_ecg
-import biosppy
 
 curdir = 'DATA\TrainData_FeatureExtraction'
 [all_data, header_data, BAD_LABELS] = data_read.data_files_load(curdir)
@@ -14,13 +13,11 @@ data = all_data[0][0]
 print(data.shape)
 print(data)
 
-signal, r_peaks = biosppy.signals.ecg.ecg(data, 500, True)[1:3]
-
 #Before the detectors can be used the class must first be initialised with the sampling rate of the ECG recording:
 detectors = Detectors(500)
 
 #Hamilton.
-#r_peaks = detectors.hamilton_detector(data) #I think unfiltered_ecg is the ecg data
+r_peaks = detectors.hamilton_detector(data) #I think unfiltered_ecg is the ecg data
 
 #Christov
 #r_peaks = detectors.christov_detector(data)
