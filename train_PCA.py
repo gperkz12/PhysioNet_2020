@@ -20,7 +20,7 @@ num_test = round(X.shape[0] * 0.2)
 test_index = rnd_index[0:num_test]
 train_index = rnd_index[num_test:]
 
-np.where(X.values >= np.finfo(np.float64).max)
+#np.where(X.values >= np.finfo(np.float64).max)
 
 X_train = X[train_index][:]
 X_test = X[test_index][:]
@@ -34,8 +34,10 @@ pca = PCA(n_components=20)
 pca.fit(X_std_train)
 X_pca_train = pca.transform(X_std_train)
 
+print(pca.explained_variance_.shape)
+print(pca.components_.shape)
 # Save sc as a pickle file for use in get_12ECG_features
-save_object(sc, 'PhysioNet_2020/sc.pkl')
+save_object(sc, 'sc.pkl')
 # Save pca as a pickle file for use in get_12ECG_features
-save_object(pca, 'PhysioNet_2020/pca.pkl')
+save_object(pca, 'pca.pkl')
 

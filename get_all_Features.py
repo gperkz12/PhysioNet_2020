@@ -26,8 +26,7 @@ def get_all_features():
 
 
 def get_file_features(data, header_data):
-    #print(header_data)
-    #print(data)
+
     tmp_hea = header_data[0].split(' ')
     ptID = tmp_hea[0]
     num_leads = int(tmp_hea[1])
@@ -39,44 +38,53 @@ def get_file_features(data, header_data):
         gain_lead[ii] = int(tmp_hea[2].split('/')[0])
 
     for i in range(0, (len(data))):
-        try:
 
-            #   We are only using data from lead1
-            peaks, idx = get_12ECG_features.detect_peaks(data[i], sample_Fs, gain_lead[i])
+        peaks, idx = get_12ECG_features.detect_peaks(data[i], sample_Fs, gain_lead[i])
 
-            #   mean
-            mean_RR = np.mean(idx / sample_Fs * 1000)
-            mean_Peaks = np.mean(peaks * gain_lead[i])
+        #   mean
+        mean_RR = np.mean(idx / sample_Fs * 1000)
+        mean_Peaks = np.mean(peaks * gain_lead[i])
 
-            #   median
-            median_RR = 0
-            median_Peaks = np.median(peaks * gain_lead[i])
+        #   median
+        median_RR = 0
+        median_Peaks = np.median(peaks * gain_lead[i])
 
-            #   standard deviation
-            std_RR = np.std(idx / sample_Fs * 1000)
-            std_Peaks = np.std(peaks * gain_lead[i])
+        #   standard deviation
+        std_RR = np.std(idx / sample_Fs * 1000)
+        std_Peaks = np.std(peaks * gain_lead[i])
 
-            #   variance
-            var_RR = stats.tvar(idx / sample_Fs * 1000)
-            var_Peaks = stats.tvar(peaks * gain_lead[i])
+        #   variance
+        var_RR = stats.tvar(idx / sample_Fs * 1000)
+        var_Peaks = stats.tvar(peaks * gain_lead[i])
 
-            #   Skewness
-            skew_RR = stats.skew(idx / sample_Fs * 1000)
-            skew_Peaks = stats.skew(peaks * gain_lead[i])
+        #   Skewness
+        skew_RR = stats.skew(idx / sample_Fs * 1000)
+        skew_Peaks = stats.skew(peaks * gain_lead[i])
 
-            #   Kurtosis
-            kurt_RR = stats.kurtosis(idx / sample_Fs * 1000)
-            kurt_Peaks = stats.kurtosis(peaks * gain_lead[i])
+        #   Kurtosis
+        kurt_RR = stats.kurtosis(idx / sample_Fs * 1000)
+        kurt_Peaks = stats.kurtosis(peaks * gain_lead[i])
 
-            curfeatures = np.vstack([mean_RR,mean_Peaks,median_RR,median_Peaks,std_RR,std_Peaks,var_RR,var_Peaks,skew_RR,skew_Peaks,kurt_RR,kurt_Peaks])
-        except:
-            curfeatures = np.vstack([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+        curfeatures = np.vstack([mean_RR,mean_Peaks,median_RR,median_Peaks,std_RR,std_Peaks,var_RR,var_Peaks,skew_RR,skew_Peaks,kurt_RR,kurt_Peaks])
+        j = 0
+        for j in range(0, (len(curfeatures))):
+            if np.isnan(curfeatures[j]):
+                curfeatures[j] = 0
+        #if curfeatures == null or infinity or nan:
+            #print("Undefined Value")
+        #else:
         if i == 0:
-            lead_features = curfeatures
+            lead_features_tmp = curfeatures
         else:
-            tmp = np.row_stack((lead_features, curfeatures))
-            lead_features = tmp
-    return lead_features
+            tmp = np.row_stack((lead_features_tmp, curfeatures))
+            lead_features_tmp = tmp
+
+
+        #nan_array = np.isnan(lead_features_tmp)
+        #not_nan_array = ~ nan_array
+        #lead_features = lead_features_tmp[not_nan_array]
+
+    return lead_features_tmp
 
 # For pickling
 def save_object(obj, filename):
