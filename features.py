@@ -1,6 +1,7 @@
 
 from ecgdetectors import Detectors
 import data_read
+from pyhrv.hrv import hrv
 from pyhrv.time_domain import nn20, nn50, sdnn, sdsd, rmssd, hr_parameters
 from pyhrv.frequency_domain import frequency_domain
 from pyhrv.tools import nn_intervals, time_varying, heart_rate_heatplot, plot_ecg
@@ -40,18 +41,23 @@ r_peaks = detectors.hamilton_detector(data) #I think unfiltered_ecg is the ecg d
 #compute nni series
 nn = nn_intervals(r_peaks)
 
+#compute hrv
+results = hrv(nn, None, None, 500)
+
 #compute and print nn20, nn50, pn20, pn50
-print(nn20(nn))
-print(nn50(nn))
+print("nn20 =", results['nn20'], "pnn20 =", results['pnn20'])
+print("nn50 =", results['nn50'], "pnn50 =", results['pnn50'])
 
 #compute and print rmssd, sdnn, sdsd, rmssd, hr_parameters
-print(sdnn(nn))
-print(sdsd(nn))
-print(rmssd(nn))
+print("sdnn =", results['sdnn'])
+print("sdsd =", results['sdsd'])
+print("rmssd =", results['rmssd'])
+
 print(hr_parameters(nn))
 
 #compute and print a frequency analysis
-print(frequency_domain(nn, None, None, 500))
+freq_results = frequency_domain(nn, None, None, 500)
+print(freq_results)
 
 
 
