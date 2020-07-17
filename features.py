@@ -7,7 +7,7 @@ from pyhrv.frequency_domain import frequency_domain
 from pyhrv.tools import nn_intervals, plot_ecg, heart_rate, tachogram
 
 
-def heart_rate_variability(sample, lead):
+def heart_rate_variability(sample, lead, rpeak_method = 'string'):
     curdir = 'DATA\TrainData_FeatureExtraction'
     [all_data, header_data, BAD_LABELS] = data_read.data_files_load(curdir)
 
@@ -18,27 +18,34 @@ def heart_rate_variability(sample, lead):
 
     """FIND RPEAK USING ONE OF THE METHODS BELOW--------------------"""
 
-    #Hamilton.
-    #r_peaks = detectors.hamilton_detector(data)
+    if rpeak_method == 'hamilton' or rpeak_method == 'string':
+        #Hamilton.
+        r_peaks = detectors.hamilton_detector(data)
 
-    #Christov
-    #r_peaks = detectors.christov_detector(data)
+    elif rpeak_method == 'christov':
+        #Christov
+        r_peaks = detectors.christov_detector(data)
 
-    #Engelse and Zeelenberg
-    #r_peaks = detectors.engzee_detector(data)
+    elif rpeak_method == 'engelse':
+        #Engelse and Zeelenberg
+        r_peaks = detectors.engzee_detector(data)
 
-    #Pan and Tompkins
-    #r_peaks = detectors.pan_tompkins_detector(data)
+    elif rpeak_method == 'engelse':
+        #Pan and Tompkins
+        r_peaks = detectors.pan_tompkins_detector(data)
 
-    #Stationary Wavelet Transform
-    r_peaks = detectors.swt_detector(data)
+    elif rpeak_method == 'stationary_wavelet':
+        #Stationary Wavelet Transform
+        r_peaks = detectors.swt_detector(data)
 
-    #Two Moving Average
-    #r_peaks = detectors.two_average_detector(data)
+    elif rpeak_method == 'two_moving_average':
+        #Two Moving Average
+        r_peaks = detectors.two_average_detector(data)
 
-    #Matched Filter
-    #go to pyhrv documentation to find the template file
-    #r_peaks = detectors.matched_filter_detector(data,template_file)
+    #elif rpeak_method == 'matched_filter':
+        #Matched Filter
+        #go to pyhrv documentation to find the template file
+        #r_peaks = detectors.matched_filter_detector(data,template_file)
 
     """COMPUTE NNI SERIES-------------------------------------------"""
     nn = nn_intervals(r_peaks) #nni seems to be off by a factor of 3
@@ -63,9 +70,9 @@ def heart_rate_variability(sample, lead):
     string description of the parameter you want
     EX: results['sdnn']"""
 
-"""TESTING HRV METHOD"""
+"""TESTING HRV METHOD------------------------------------------------"""
 
-results, hr, freq_results = heart_rate_variability(0,0)
+results, hr, freq_results = heart_rate_variability(0, 0, 'christov')
 
 print(hr, '\n\n')
 print('sdnn = ', results['sdnn'], '\n\n')
