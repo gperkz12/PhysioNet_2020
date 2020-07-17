@@ -2,62 +2,82 @@
 from ecgdetectors import Detectors
 import data_read
 from pyhrv.hrv import hrv
-from pyhrv.time_domain import nn20, nn50, sdnn, sdsd, rmssd, hr_parameters
+from pyhrv.time_domain import hr_parameters
 from pyhrv.frequency_domain import frequency_domain
-from pyhrv.tools import nn_intervals, time_varying, heart_rate_heatplot, plot_ecg
-
-curdir = 'DATA\TrainData_FeatureExtraction'
-[all_data, header_data, BAD_LABELS] = data_read.data_files_load(curdir)
+from pyhrv.tools import nn_intervals, plot_ecg, heart_rate, tachogram
 
 
-data = all_data[0][0]
-print(data.shape)
-print(data)
+def heart_rate_variability(sample, lead):
+    curdir = 'DATA\TrainData_FeatureExtraction'
+    [all_data, header_data, BAD_LABELS] = data_read.data_files_load(curdir)
 
-#Before the detectors can be used the class must first be initialised with the sampling rate of the ECG recording:
-detectors = Detectors(500)
+    data = all_data[sample][lead]
 
-#Hamilton.
-r_peaks = detectors.hamilton_detector(data) #I think unfiltered_ecg is the ecg data
+    """INITIALIZE DETECTOR CLASS WITH THE SAMPLING RATE:"""
+    detectors = Detectors(500)
 
-#Christov
-#r_peaks = detectors.christov_detector(data)
+    """FIND RPEAK USING ONE OF THE METHODS BELOW--------------------"""
 
-#Engelse and Zeelenberg
-#r_peaks = detectors.engzee_detector(data)
+    #Hamilton.
+    #r_peaks = detectors.hamilton_detector(data)
 
-#Pan and Tompkins
-#r_peaks = detectors.pan_tompkins_detector(data)
+    #Christov
+    #r_peaks = detectors.christov_detector(data)
 
-#Stationary Wavelet Transform
-#r_peaks = detectors.swt_detector(data)
+    #Engelse and Zeelenberg
+    #r_peaks = detectors.engzee_detector(data)
 
-#Two Moving Average
-#r_peaks = detectors.two_average_detector(data)
+    #Pan and Tompkins
+    #r_peaks = detectors.pan_tompkins_detector(data)
 
-#Matched Filter
-#r_peaks = detectors.matched_filter_detector(data,template_file)
+    #Stationary Wavelet Transform
+    r_peaks = detectors.swt_detector(data)
 
-#compute nni series
-nn = nn_intervals(r_peaks)
+    #Two Moving Average
+    #r_peaks = detectors.two_average_detector(data)
 
-#compute hrv
-results = hrv(nn, None, None, 500)
+    #Matched Filter
+    #go to pyhrv documentation to find the template file
+    #r_peaks = detectors.matched_filter_detector(data,template_file)
 
-#compute and print nn20, nn50, pn20, pn50
-print("nn20 =", results['nn20'], "pnn20 =", results['pnn20'])
-print("nn50 =", results['nn50'], "pnn50 =", results['pnn50'])
+    """COMPUTE NNI SERIES-------------------------------------------"""
+    nn = nn_intervals(r_peaks) #nni seems to be off by a factor of 3
+    print("\n\n", nn, "\n\n")
 
-#compute and print rmssd, sdnn, sdsd, rmssd, hr_parameters
-print("sdnn =", results['sdnn'])
-print("sdsd =", results['sdsd'])
-print("rmssd =", results['rmssd'])
+    """PLOT ECG/TACHOGRAM-------------------------------------------"""
+    #plot_ecg(data, sampling_rate = 500)
+    #tachogram(nn, sampling_rate = 500)
 
-print(hr_parameters(nn))
+    """COMPUTE HRV--------------------------------------------------"""
+    results = hrv(nn, None, None, 500)
 
-#compute and print a frequency analysis
-freq_results = frequency_domain(nn, None, None, 500)
-print(freq_results)
+    """COMPUTE HR PARAMETERS--(SOMETHING IS WRONG HERE BPM TOO HIGH)"""
+    hr = heart_rate(nn)
 
+    """COMPUTE FREQUENCY ANALYSIS-----------------------------------"""
+    freq_results = results['fft_bands']
 
+    return results, hr, freq_results
 
+"""To retrieve parameters from the Tuple, index the Tuple by the 
+    string description of the parameter you want
+    EX: results['sdnn']"""
+
+"""TESTING HRV METHOD"""
+
+results, hr, freq_results = heart_rate_variability(0,0)
+
+print(hr, '\n\n')
+print('sdnn = ', results['sdnn'], '\n\n')
+print('rmssd = ', results['rmssd'], '\n\n')
+print('nn20 = ', results['nn20'], '\n\n')
+print('nn50 = ', results['nn50'], '\n\n')
+print('sdsd = ', results['sdsd'], '\n\n')
+print('pnn20 = ', results['pnn20'], '\n\n')
+print('pnn50 = ', results['pnn50'], '\n\n')
+print('lf = ', freq_results['lf'] , '\n\n')
+print('hf = ', freq_results['hf'], '\n\n')
+print('fft_ratio = ', results['fft_ratio'], '\n\n')
+print('hr_mean = ', results['hr_mean'], '\n\n')
+print('hr_min = ', results['hr_min'], '\n\n')
+print('hr_max = ', results['hr_mean'], '\n\n')
