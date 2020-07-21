@@ -6,7 +6,6 @@ import get_all_Features
 
 get_all_Features.get_all_features()
 """
-##################################
 
 ##################################
 #### TEST get_fourier_data.py ####
