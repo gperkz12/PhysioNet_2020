@@ -9,12 +9,21 @@ get_all_Features.get_all_features()
 ##################################
 
 ##################################
-#### TEST features.py ####
+#### TEST get_fourier_data.py ####
 
+import get_fourier_data
+
+get_fourier_data.get_all_features()
+
+##################################
+
+##################################
+#### TEST features.py ####
+"""
 import features
 
 features.heart_rate_variability(105,7,'pan')
-
+"""
 #################################
 
 ###########################
