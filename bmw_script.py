@@ -1,19 +1,19 @@
 
 ##################################
 #### TEST get_all_Features.py ####
-"""
+
 import get_all_Features
 
 get_all_Features.get_all_features()
-"""
+
 
 ##################################
 #### TEST get_fourier_data.py ####
-
+"""
 import get_fourier_data
 
 get_fourier_data.get_all_features()
-
+"""
 ##################################
 
 ##################################

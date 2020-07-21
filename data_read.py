@@ -21,7 +21,7 @@ def data_files_list(input_directory):
 
 
 
-def data_files_load(input_directory,input_files = '',mapping_labels = False, reference_label = True, meta_data = True):
+def data_files_load(input_directory,input_files = '',mapping_labels = False, reference_label = False, meta_data = True):
     """Load data files as list along with the labels from the given data directory"""
     # INPUT:
     # input_directory - path of input data
