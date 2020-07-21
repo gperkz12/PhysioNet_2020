@@ -39,6 +39,7 @@ def get_fourier_data(data, header_data):
         gain_lead[ii] = int(tmp_hea[2].split('/')[0])
 
     for i in range(0, (len(data))):
+        print(i)
         print(len(data[i]))
 
         x = [len(data[i])]

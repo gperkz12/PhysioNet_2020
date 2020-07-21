@@ -1,29 +1,25 @@
 
 ##################################
 #### TEST get_all_Features.py ####
-<<<<<<< Updated upstream
 """
 import get_all_Features
 
 get_all_Features.get_all_features()
 """
 ##################################
-=======
 
-#import get_all_Features
 import get_fourier_data
 
-#get_all_Features.get_all_features()
 get_fourier_data.get_all_features()
->>>>>>> Stashed changes
+
 
 ##################################
 #### TEST features.py ####
-
+"""
 import features
 
 features.heart_rate_variability(105,7,'pan')
-
+"""
 #################################
 
 ###########################
