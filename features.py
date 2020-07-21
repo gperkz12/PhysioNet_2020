@@ -30,7 +30,7 @@ def heart_rate_variability(sample, lead, rpeak_method = 'string'):
         #Engelse and Zeelenberg
         r_peaks = detectors.engzee_detector(data)
 
-    elif rpeak_method == 'engelse':
+    elif rpeak_method == 'pan':
         #Pan and Tompkins
         r_peaks = detectors.pan_tompkins_detector(data)
 
