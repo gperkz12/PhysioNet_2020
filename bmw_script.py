@@ -1,11 +1,12 @@
 
 ##################################
 #### TEST get_all_Features.py ####
-
+"""
 import get_all_Features
 
 get_all_Features.get_all_features()
-
+"""
+##################################
 
 ##################################
 #### TEST get_fourier_data.py ####
@@ -18,11 +19,11 @@ get_fourier_data.get_all_features()
 
 ##################################
 #### TEST features.py ####
-"""
-import features
 
-features.heart_rate_variability(105,7,'pan')
-"""
+import hrv_features
+
+hrv_features.heart_rate_variability(105,7,'pan')
+
 #################################
 
 ###########################
