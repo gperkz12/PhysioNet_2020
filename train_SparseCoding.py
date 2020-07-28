@@ -2,10 +2,11 @@ import numpy as np
 import pickle as pk
 from sklearn.decomposition import DictionaryLearning
 from sklearn import datasets
+from sklearn import preprocessing
 
-#import iris practice data
-iris = datasets.load_iris()
-X = iris.data
+#load pca data
+pca_data = pk.load(open("pca_data.pkl", 'rb'))
+X = pca_data
 
 def save_object(obj, filename):
     with open(filename, 'wb') as output:  # Overwrites any existing file.
@@ -23,11 +24,10 @@ X_test = X[test_index][:]
 
 #uses the dictionary learning class to transform the data
 
-atoms = DictionaryLearning(None, 1, 1000, 1e-08, 'lars', 'omp', None, None, None, None, None, False, False, None, False,
+atoms = DictionaryLearning(None, .2, 1000, 1e-8, 'lars', 'omp', None, None, None, None, None, False, False, None, False,
                            False)
 
 #fit and transform data
-
 atoms.fit(X_train)
 
 traindata = atoms.transform(X_train)
@@ -35,4 +35,6 @@ traindata = atoms.transform(X_train)
 testdata = atoms.transform(X_test)
 
 # Pickle atoms
-save_object(atoms, 'PhysioNet_2020/atoms.pkl')
+save_object(atoms, 'atoms.pkl')
+
+print(traindata, '\n\n\n', testdata)
