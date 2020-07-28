@@ -1,11 +1,11 @@
 
 ##################################
 #### TEST get_all_Features.py ####
-"""
+
 import get_all_Features
 
 get_all_Features.get_all_features()
-"""
+
 ##################################
 
 ##################################
@@ -19,11 +19,11 @@ get_fourier_data.get_all_features()
 
 ##################################
 #### TEST features.py ####
-
+"""
 import hrv_features
 
 hrv_features.heart_rate_variability(105,7,'pan')
-
+"""
 #################################
 
 ###########################
@@ -31,12 +31,18 @@ hrv_features.heart_rate_variability(105,7,'pan')
 """
 import data_read
 
-[list_data,list_label] = data_read.data_files_load('./DATA/TrainData_FeatureExtraction')
+[list_data,list_label,list_files,list_header] = data_read.data_files_load('./DATA/TrainData_FeatureExtraction_sub')
 for n in list_data:
     print(n.shape)
 print('................')
 print(len(list_label))
+print('................')
+
+pass_header = list_header[0];
+print(pass_header)
+print(len(pass_header))
 """
+
 ###########################
 
 ###########################
