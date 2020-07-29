@@ -1,11 +1,11 @@
 
 ##################################
 #### TEST get_all_Features.py ####
+"""
+import get_all_Features
 
-#import get_all_Features
-
-#get_all_Features.get_all_features()
-
+get_all_Features.get_all_features()
+"""
 ##################################
 
 ##################################

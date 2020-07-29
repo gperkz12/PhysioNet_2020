@@ -18,11 +18,18 @@ def get_all_features():
     for i in range(0, (len(data))):
         curfeatures = get_fourier_data(data[i], header_data[i])
         if i == 0:
-            sparse_data = curfeatures
+            Fourier_data = curfeatures
         else:
-            tmp = np.column_stack((psa_data, curfeatures))
-            sparse_data = tmp
-    save_object(sparse_data, '.\sparse_data.pkl')
+            tmp = np.column_stack((Fourier_data, curfeatures))
+            Fourier_data = tmp
+    save_object(Fourier_data, '.\Fourier_data.pkl')
+    print(Fourier_data.shape)
+
+    plt.style.use('ggplot')
+    plt.hist(Fourier_data, bins=20)
+    plt.show()
+
+    print(Fourier_data.shape)
 
     return 0
 
@@ -38,15 +45,15 @@ def get_fourier_data(data, header_data):
     for ii in range(num_leads):
         gain_lead[ii] = header_data[3+ii]
 
-    for i in range(0, (len(data))):
-        print(i)
-        print(len(data[i]))
 
-        x = [len(data[i])]
+    tmp_fourier_data = len(data[0])
+    return tmp_fourier_data
 
-    plt.style.use('ggplot')
-    plt.hist(x, bins=20)
-    plt.show()
+    #x = [len(data[i])]
+
+    #plt.style.use('ggplot')
+    #plt.hist(x, bins=20)
+    #plt.show()
 
 # For pickling
 def save_object(obj, filename):
