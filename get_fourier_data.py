@@ -14,39 +14,46 @@ import matplotlib.pyplot as plt
 def get_all_features():
 
     traindata = 'DATA\TrainData_FeatureExtraction'
-    [data, header_data, BAD_LABELS] = data_read.data_files_load(traindata)
+    [data, labels, filenames, header_data] = data_read.data_files_load(traindata)
     for i in range(0, (len(data))):
         curfeatures = get_fourier_data(data[i], header_data[i])
         if i == 0:
-            sparse_data = curfeatures
+            Fourier_data = curfeatures
         else:
-            tmp = np.column_stack((psa_data, curfeatures))
-            sparse_data = tmp
-    save_object(sparse_data, '.\sparse_data.pkl')
+            tmp = np.column_stack((Fourier_data, curfeatures))
+            Fourier_data = tmp
+    save_object(Fourier_data, '.\Fourier_data.pkl')
+    print(Fourier_data.shape)
+
+    plt.style.use('ggplot')
+    plt.hist(Fourier_data, bins=20)
+    plt.show()
+
+    print(Fourier_data.shape)
 
     return 0
 
 
 def get_fourier_data(data, header_data):
 
-    tmp_hea = header_data[0].split(' ')
-    ptID = tmp_hea[0]
-    num_leads = int(tmp_hea[1])
-    sample_Fs = int(tmp_hea[2])
+    age = header_data[0]
+    sex = header_data[1]
+    sample_Fs = header_data[2]
+    num_leads = len(header_data) - 3
     gain_lead = np.zeros(num_leads)
+
     for ii in range(num_leads):
-        tmp_hea = header_data[ii + 1].split(' ')
-        gain_lead[ii] = int(tmp_hea[2].split('/')[0])
+        gain_lead[ii] = header_data[3+ii]
 
-    for i in range(0, (len(data))):
-        print(i)
-        print(len(data[i]))
 
-        x = [len(data[i])]
+    tmp_fourier_data = len(data[0])
+    return tmp_fourier_data
 
-    plt.style.use('ggplot')
-    plt.hist(x, bins=20)
-    plt.show()
+    #x = [len(data[i])]
+
+    #plt.style.use('ggplot')
+    #plt.hist(x, bins=20)
+    #plt.show()
 
 # For pickling
 def save_object(obj, filename):
