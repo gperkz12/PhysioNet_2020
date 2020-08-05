@@ -22,14 +22,15 @@ def get_all_features():
         else:
             tmp = np.column_stack((Fourier_data, curfeatures))
             Fourier_data = tmp
-    save_object(Fourier_data, '.\Fourier_data.pkl')
+
     print(Fourier_data.shape)
 
     plt.style.use('ggplot')
     plt.hist(Fourier_data, bins=20)
     plt.show()
 
-    print(Fourier_data.shape)
+    save_object(Fourier_data, '.\Fourier_data.pkl')
+
 
     return 0
 
