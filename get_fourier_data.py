@@ -6,6 +6,7 @@ import data_read
 from scipy.signal import butter, lfilter
 from scipy import stats
 import matplotlib.pyplot as plt
+import scipy.fft
 
 
 # data files load
@@ -25,9 +26,10 @@ def get_all_features():
 
     print(Fourier_data.shape)
 
-    plt.style.use('ggplot')
-    plt.hist(Fourier_data, bins=20)
-    plt.show()
+    #plt.style.use('ggplot')
+    #plt.hist(Fourier_data, bins=20)
+    #plt.show()
+    
 
     save_object(Fourier_data, '.\Fourier_data.pkl')
 
