@@ -31,7 +31,7 @@ def get_all_features():
     #plt.show()
     
 
-    save_object(Fourier_data, '.\Fourier_data.pkl')
+    save_object(Fourier_data, 'Fourier_data.pkl')
 
 
     return 0
