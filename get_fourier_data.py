@@ -6,15 +6,15 @@ import data_read
 from scipy.signal import butter, lfilter
 from scipy import stats
 import matplotlib.pyplot as plt
-import scipy.fft
+from scipy import fft
 
 
 # data files load
 
 
 def get_all_features():
-
-    traindata = 'DATA\TrainData_FeatureExtraction'
+    # When on windows it's a backslash slash, on linux its a forward slash
+    traindata = 'DATA/TrainData_FeatureExtraction'
     [data, labels, filenames, header_data] = data_read.data_files_load(traindata)
     for i in range(0, (len(data))):
         curfeatures = get_fourier_data(data[i], header_data[i])
@@ -29,9 +29,15 @@ def get_all_features():
     #plt.style.use('ggplot')
     #plt.hist(Fourier_data, bins=20)
     #plt.show()
-    
 
-    save_object(Fourier_data, '.\Fourier_data.pkl')
+    transform_data = np.fft.fft(Fourier_data, 8192)
+    print(transform_data.shape)
+
+    first_4096 = transform_data[0:1, 0:4096]
+
+    print(first_4096.shape)
+
+    save_object(Fourier_data, 'Fourier_data.pkl')
 
 
     return 0
@@ -51,12 +57,6 @@ def get_fourier_data(data, header_data):
 
     tmp_fourier_data = len(data[0])
     return tmp_fourier_data
-
-    #x = [len(data[i])]
-
-    #plt.style.use('ggplot')
-    #plt.hist(x, bins=20)
-    #plt.show()
 
 # For pickling
 def save_object(obj, filename):
