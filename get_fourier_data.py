@@ -24,26 +24,6 @@ def get_all_features():
             tmp = np.column_stack((Fourier_data, curfeatures))
             Fourier_data = tmp
 
-    print(Fourier_data.shape)
-
-    #plt.style.use('ggplot')
-    #plt.hist(Fourier_data, bins=20)
-    #plt.show()
-    n_samples = 8192
-    t0 = 0
-    t1 = 1
-
-    transform_data = np.fft.fft(Fourier_data, n_samples)
-    print(transform_data.shape)
-
-    first_4096 = transform_data[:, 0:round(n_samples/2)]
-
-    amplitudes = np.abs(transform_data)
-
-    plt.show()
-    print(first_4096.shape)
-    print(amplitudes)
-
     save_object(Fourier_data, 'Fourier_data.pkl')
 
 
@@ -61,13 +41,25 @@ def get_fourier_data(data, header_data):
     for ii in range(num_leads):
         gain_lead[ii] = header_data[3+ii]
 
+    n_samples = 8192
+    for i in range(0, len(data)):
+        curdata = np.fft.fft(data[i], n_samples)
+        if i == 0:
+            Fdata = curdata
+        else:
+            tmp = np.column_stack((Fdata, curdata))
+            Fdata = tmp
 
-    tmp_fourier_data = len(data[0])
-    return tmp_fourier_data
+    print(Fdata.shape)
+
+    Fdata = np.abs(Fdata)
+    print(Fdata.shape)
+    Fdata = Fdata[:, 0:round(n_samples / 2)]
+    print(Fdata.shape)
+
+    return Fdata
 
 # For pickling
 def save_object(obj, filename):
     with open(filename, 'wb') as output:  # Overwrites any existing file.
         pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
-
-# Try axcept
