@@ -4,9 +4,9 @@ from sklearn.decomposition import DictionaryLearning
 from sklearn import datasets
 from sklearn import preprocessing
 
-#load pca data
-pca_data = pk.load(open("pca_data.pkl", 'rb'))
-X = pca_data
+#load fourier data
+fourier_data = pk.load(open("Fourier_data.pkl", 'rb'))
+X = fourier_data
 
 
 def save_object(obj, filename):
