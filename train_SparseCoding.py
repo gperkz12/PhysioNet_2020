@@ -8,7 +8,6 @@ from sklearn import preprocessing
 fourier_data = pk.load(open("Fourier_data.pkl", 'rb'))
 X = fourier_data
 
-
 def save_object(obj, filename):
     with open(filename, 'wb') as output:  # Overwrites any existing file.
         pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
@@ -25,7 +24,7 @@ X_test = X[test_index][:]
 
 #uses the dictionary learning class to transform the data
 
-atoms = DictionaryLearning(None, 1, 1000, 1e-8, 'lars', 'lasso_lars')
+atoms = DictionaryLearning(100, 5, 1000, 1e-8, 'lars', 'lasso_lars')
 
 #fit and transform data
 atoms.fit(X= X_train)
