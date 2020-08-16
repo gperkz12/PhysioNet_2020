@@ -17,12 +17,13 @@ def get_all_features():
     traindata = 'DATA/TrainData_FeatureExtraction'
     [data, labels, filenames, header_data] = data_read.data_files_load(traindata)
     for i in range(0, (len(data))):
-        curfeatures = get_fourier_data(data[i], header_data[i])
-        if i == 0:
-            Fourier_data = curfeatures
-        else:
-            tmp = np.column_stack((Fourier_data, curfeatures))
-            Fourier_data = tmp
+         curfeatures = get_fourier_data(data[i], header_data[i])
+         if i == 0:
+             Fourier_data = curfeatures
+         else:
+             tmp = np.vstack((Fourier_data, curfeatures))
+             Fourier_data = tmp
+    print(Fourier_data.shape)
 
     save_object(Fourier_data, 'Fourier_data.pkl')
 
@@ -47,16 +48,12 @@ def get_fourier_data(data, header_data):
         if i == 0:
             Fdata = curdata
         else:
-            tmp = np.column_stack((Fdata, curdata))
+            tmp = np.vstack((Fdata, curdata))
             Fdata = tmp
 
-    print(Fdata.shape)
-
     Fdata = np.abs(Fdata)
-    print(Fdata.shape)
-    Fdata = Fdata[:, 0:round(n_samples / 2)]
-    print(Fdata.shape)
 
+    Fdata = Fdata[:, 0:round(n_samples / 2)]
     return Fdata
 
 # For pickling
