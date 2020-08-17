@@ -4,7 +4,13 @@ from sklearn.decomposition import DictionaryLearning
 from sklearn import datasets
 from sklearn import preprocessing
 
-#load pca data
+
+# For pickling
+def save_object(obj, filename):
+    with open(filename, 'wb') as output:  # Overwrites any existing file.
+        pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
+
+# Load sparse data
 Fourier_data = pk.load(open("Fourier_data.pkl", 'rb'))
 X = Fourier_data
 
@@ -24,8 +30,3 @@ print(traindata.shape)
 
 # Pickle atoms
 save_object(atoms.components_, 'atoms.pkl')
-
-
-def save_object(obj, filename):
-    with open(filename, 'wb') as output:  # Overwrites any existing file.
-        pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
