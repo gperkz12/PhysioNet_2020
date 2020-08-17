@@ -1,30 +1,4 @@
-Skip
-to
-content
-Using
-Gmail
-with screen readers
-Meet
-Hangouts
-3
-of
-8, 501
-12
-ECG
-Inbox
-x
-Garrett
-Perkins < gperkz12 @ gmail.com >
-
-5: 03
-PM(3
-hours
-ago)
-
-to
-me
-
-# !/usr/bin/env python
+#!/usr/bin/env python
 
 import numpy as np
 import scipy.io as sio
@@ -193,47 +167,8 @@ def get_12ECG_features(data, header_data):
             label = iline.split(': ')[1].split(',')[0]
 
     #   Add more features: PCA and Sparse Coding
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-    # PCA
-=======
-    
-#   We are only using data from lead1
-    peaks,idx = detect_peaks(data[0],sample_Fs,gain_lead[0])
-   
-#   mean
-    mean_RR = np.mean(idx/sample_Fs*1000)
-    mean_Peaks = np.mean(peaks*gain_lead[0])
-
-#   median
-    median_RR = 0
-    median_Peaks = np.median(peaks*gain_lead[0])
-
-#   standard deviation
-    std_RR = np.std(idx/sample_Fs*1000)
-    std_Peaks = np.std(peaks*gain_lead[0])
-
-#   variance
-    var_RR = stats.tvar(idx/sample_Fs*1000)
-    var_Peaks = stats.tvar(peaks*gain_lead[0])
-
-#   Skewness
-    skew_RR = stats.skew(idx/sample_Fs*1000)
-    skew_Peaks = stats.skew(peaks*gain_lead[0])
-
-#   Kurtosis
-    kurt_RR = stats.kurtosis(idx/sample_Fs*1000)
-    kurt_Peaks = stats.kurtosis(peaks*gain_lead[0])
-
-#   Add more features: PCA and Sparse Coding
-
-# PCA
->>>>>>> parent of 5f498d4... Working
-=======
 
     # PCA
->>>>>>> master
     # Load up pca and sc
     pca = pk.load(open("pca.pkl", 'rb'))
     sc = pk.load(open("sc.pkl", 'rb'))
@@ -251,36 +186,11 @@ def get_12ECG_features(data, header_data):
 
     features = np.hstack([X_pca_test, X_sparse_test])
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-    features = np.hstack([X_pca_test, X_sparse_test])
-
-  
-=======
->>>>>>> master
-    return features
-
-def get_train_classifier_features():
-
-<<<<<<< HEAD
-    for each file in train classifier:
-        file_features = get_12ECG_features(data)
-        vstack
-        save_object
-=======
-=======
     return features
 
 
->>>>>>> master
 def get_train_classifier_features():
     for each file in train classifier:
         file_features = get_12ECG_features(data)
         vstack
-<<<<<<< HEAD
         save_object
->>>>>>> master
-=======
-        save_object
->>>>>>> master
