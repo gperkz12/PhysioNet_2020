@@ -4,6 +4,7 @@ from sklearn.decomposition import DictionaryLearning
 from sklearn import datasets
 from sklearn import preprocessing
 
+<<<<<<< HEAD
 #load fourier data
 fourier_data = pk.load(open("Fourier_data.pkl", 'rb'))
 X = fourier_data
@@ -25,15 +26,27 @@ X_test = X[test_index][:]
 #uses the dictionary learning class to transform the data
 
 atoms = DictionaryLearning(100, 5, 1000, 1e-8, 'lars', 'lasso_lars')
+=======
+#load pca data
+Fourier_data = pk.load(open("Fourier_data.pkl", 'rb'))
+X = Fourier_data
+
+#uses the dictionary learning class to transform the data
+
+atoms = DictionaryLearning(100, 1, 1000, 1e-8, 'lars', 'lasso_lars')
+>>>>>>> master
 
 #fit and transform data
-atoms.fit(X= X_train)
+atoms.fit(X)
 
-traindata = atoms.transform(X_train)
-
-testdata = atoms.transform(X_test)
+traindata = atoms.transform(X)
 
 # Pickle atoms
 save_object(atoms, 'atoms.pkl')
 
-print(traindata, '\n\n\n', testdata)
+print(traindata)
+print(traindata.shape)
+
+def save_object(obj, filename):
+    with open(filename, 'wb') as output:  # Overwrites any existing file.
+        pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
