@@ -1,4 +1,30 @@
-#!/usr/bin/env python
+Skip
+to
+content
+Using
+Gmail
+with screen readers
+Meet
+Hangouts
+3
+of
+8, 501
+12
+ECG
+Inbox
+x
+Garrett
+Perkins < gperkz12 @ gmail.com >
+
+5: 03
+PM(3
+hours
+ago)
+
+to
+me
+
+# !/usr/bin/env python
 
 import numpy as np
 import scipy.io as sio
