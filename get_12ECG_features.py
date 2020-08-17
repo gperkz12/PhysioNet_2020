@@ -190,7 +190,3 @@ def get_12ECG_features(data, header_data):
 
 
 def get_train_classifier_features():
-    for each file in train classifier:
-        file_features = get_12ECG_features(data)
-        vstack
-        save_object

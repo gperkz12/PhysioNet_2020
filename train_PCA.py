@@ -36,8 +36,12 @@ X_pca_train = pca.transform(X_std_train)
 
 print(pca.explained_variance_.shape)
 print(pca.components_.shape)
+pca.components_ = np.transpose(pca.components_)
+print(pca.components_.shape)
+
+
 # Save sc as a pickle file for use in get_12ECG_features
 save_object(sc, 'sc.pkl')
 # Save pca as a pickle file for use in get_12ECG_features
-save_object(pca, 'pca.pkl')
+save_object(pca.components_, 'pca.pkl')
 

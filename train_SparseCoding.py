@@ -17,11 +17,14 @@ atoms.fit(X)
 
 traindata = atoms.transform(X)
 
+
+
+print(atoms.shape)
+print(traindata.shape)
+
 # Pickle atoms
 save_object(atoms, 'atoms.pkl')
 
-print(traindata)
-print(traindata.shape)
 
 def save_object(obj, filename):
     with open(filename, 'wb') as output:  # Overwrites any existing file.

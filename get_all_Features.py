@@ -11,7 +11,7 @@ from scipy import stats
 
 def get_all_features():
 
-    traindata = 'DATA\TrainData_FeatureExtraction'
+    traindata = 'DATA/TrainData_Classifier'
     [data, labels, filenames, header_data] = data_read.data_files_load(traindata)
     for i in range(0, (len(data))):
         curfeatures = get_file_features(data[i], header_data[i])
@@ -20,7 +20,8 @@ def get_all_features():
         else:
             tmp = np.column_stack((pca_data, curfeatures))
             pca_data = tmp
-    save_object(pca_data, '.\pca_data.pkl')
+    print(pca_data.shape)
+    save_object(pca_data, 'pca_data.pkl')
 
     return 0
 
@@ -69,19 +70,11 @@ def get_file_features(data, header_data):
         for j in range(0, (len(curfeatures))):
             if np.isnan(curfeatures[j]):
                 curfeatures[j] = 0
-        #if curfeatures == null or infinity or nan:
-            #print("Undefined Value")
-        #else:
         if i == 0:
             lead_features_tmp = curfeatures
         else:
             tmp = np.row_stack((lead_features_tmp, curfeatures))
             lead_features_tmp = tmp
-
-
-        #nan_array = np.isnan(lead_features_tmp)
-        #not_nan_array = ~ nan_array
-        #lead_features = lead_features_tmp[not_nan_array]
 
     return lead_features_tmp
 
