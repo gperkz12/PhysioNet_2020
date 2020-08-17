@@ -17,13 +17,38 @@ def get_all_features():
     traindata = 'DATA/TrainData_FeatureExtraction'
     [data, labels, filenames, header_data] = data_read.data_files_load(traindata)
     for i in range(0, (len(data))):
-        curfeatures = get_fourier_data(data[i], header_data[i])
-        if i == 0:
-            Fourier_data = curfeatures
-        else:
-            tmp = np.column_stack((Fourier_data, curfeatures))
-            Fourier_data = tmp
+         curfeatures = get_fourier_data(data[i], header_data[i])
+         if i == 0:
+             Fourier_data = curfeatures
+         else:
+             tmp = np.vstack((Fourier_data, curfeatures))
+             Fourier_data = tmp
+    print(Fourier_data.shape)
 
+<<<<<<< HEAD
+=======
+    #plt.style.use('ggplot')
+    #plt.hist(Fourier_data, bins=20)
+    #plt.show()
+    n_samples = 8192
+    t0 = 0
+    t1 = 1
+
+    transform_data = np.fft.fft(Fourier_data, n_samples)
+    print(transform_data.shape)
+
+    first_4096 = transform_data[0:1, 0:round(n_samples/2)]
+
+    amplitudes = 2 / 8192 * np.abs(transform_data)
+    frequencies = np.fft.fftfreq(n_samples) * n_samples * 1 / (t1 - t0)
+    plt.semilogx(frequencies[:len(frequencies) // 2], amplitudes[:len(transform_data) // 2])
+    plt.show()
+
+    plt.show()
+    print(first_4096.shape)
+    print(amplitudes)
+
+>>>>>>> parent of 5f498d4... Working
     save_object(Fourier_data, 'Fourier_data.pkl')
 
 
@@ -47,16 +72,12 @@ def get_fourier_data(data, header_data):
         if i == 0:
             Fdata = curdata
         else:
-            tmp = np.column_stack((Fdata, curdata))
+            tmp = np.vstack((Fdata, curdata))
             Fdata = tmp
 
-    print(Fdata.shape)
-
     Fdata = np.abs(Fdata)
-    print(Fdata.shape)
-    Fdata = Fdata[:, 0:round(n_samples / 2)]
-    print(Fdata.shape)
 
+    Fdata = Fdata[:, 0:round(n_samples / 2)]
     return Fdata
 
 # For pickling
