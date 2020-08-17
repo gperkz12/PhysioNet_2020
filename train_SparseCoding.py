@@ -19,11 +19,11 @@ traindata = atoms.transform(X)
 
 
 
-print(atoms.shape)
+print(atoms.components_.shape)
 print(traindata.shape)
 
 # Pickle atoms
-save_object(atoms, 'atoms.pkl')
+save_object(atoms.components_, 'atoms.pkl')
 
 
 def save_object(obj, filename):
