@@ -9,6 +9,7 @@ from sklearn import preprocessing
 #load pca data
 Fourier_data = pk.load(open("Fourier_data.pkl", 'rb'))
 X = Fourier_data
+<<<<<<< HEAD
 
 #uses the dictionary learning class to transform the data
 
@@ -52,6 +53,16 @@ atoms = DictionaryLearning(100, 1, 1000, 1e-8, 'lars', 'lasso_lars')
 #fit and transform data
 atoms.fit(X)
 
+=======
+
+#uses the dictionary learning class to transform the data
+
+atoms = DictionaryLearning(100, 1, 1000, 1e-8, 'lars', 'lasso_lars')
+
+#fit and transform data
+atoms.fit(X)
+
+>>>>>>> master
 traindata = atoms.transform(X)
 
 # Pickle atoms

@@ -193,6 +193,7 @@ def get_12ECG_features(data, header_data):
             label = iline.split(': ')[1].split(',')[0]
 
     #   Add more features: PCA and Sparse Coding
+<<<<<<< HEAD
 
 <<<<<<< HEAD
     # PCA
@@ -229,6 +230,10 @@ def get_12ECG_features(data, header_data):
 
 # PCA
 >>>>>>> parent of 5f498d4... Working
+=======
+
+    # PCA
+>>>>>>> master
     # Load up pca and sc
     pca = pk.load(open("pca.pkl", 'rb'))
     sc = pk.load(open("sc.pkl", 'rb'))
@@ -247,6 +252,7 @@ def get_12ECG_features(data, header_data):
     features = np.hstack([X_pca_test, X_sparse_test])
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     features = np.hstack([X_pca_test, X_sparse_test])
 
@@ -263,9 +269,18 @@ def get_train_classifier_features():
         vstack
         save_object
 =======
+=======
+    return features
+
+
+>>>>>>> master
 def get_train_classifier_features():
     for each file in train classifier:
         file_features = get_12ECG_features(data)
         vstack
+<<<<<<< HEAD
+        save_object
+>>>>>>> master
+=======
         save_object
 >>>>>>> master

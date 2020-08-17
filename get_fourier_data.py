@@ -24,6 +24,7 @@ def get_all_features():
              tmp = np.vstack((Fourier_data, curfeatures))
              Fourier_data = tmp
     print(Fourier_data.shape)
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
@@ -38,6 +39,8 @@ def get_all_features():
     print(transform_data.shape)
 
     first_4096 = transform_data[0:1, 0:round(n_samples/2)]
+=======
+>>>>>>> master
 
     amplitudes = 2 / 8192 * np.abs(transform_data)
     frequencies = np.fft.fftfreq(n_samples) * n_samples * 1 / (t1 - t0)
