@@ -50,8 +50,16 @@ def get_fourier_data(data, header_data):
         else:
             tmp = np.vstack((Fdata, curdata))
             Fdata = tmp
+<<<<<<< HEAD
 
     Fdata = np.abs(Fdata)
+=======
+
+    Fdata = np.abs(Fdata)
+
+    Fdata = Fdata[:, 0:round(n_samples / 2)]
+    return Fdata
+>>>>>>> master
 
     Fdata = Fdata[:, 0:round(n_samples / 2)]
     return Fdata
