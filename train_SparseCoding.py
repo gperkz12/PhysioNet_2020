@@ -4,10 +4,23 @@ from sklearn.decomposition import DictionaryLearning
 from sklearn import datasets
 from sklearn import preprocessing
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 #load pca data
-pca_data = pk.load(open("pca_data.pkl", 'rb'))
-X = pca_data
+Fourier_data = pk.load(open("Fourier_data.pkl", 'rb'))
+X = Fourier_data
+<<<<<<< HEAD
 
+#uses the dictionary learning class to transform the data
+
+atoms = DictionaryLearning(100, 1, 1000, 1e-8, 'lars', 'lasso_lars')
+
+=======
+<<<<<<< HEAD
+#load fourier data
+fourier_data = pk.load(open("Fourier_data.pkl", 'rb'))
+X = fourier_data
+#test
 def save_object(obj, filename):
     with open(filename, 'wb') as output:  # Overwrites any existing file.
         pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
@@ -24,17 +37,40 @@ X_test = X[test_index][:]
 
 #uses the dictionary learning class to transform the data
 
-atoms = DictionaryLearning(None, .2, 1000, 1e-8, 'lars', 'omp', None, None, None, None, None, False, False, None, False,
-                           False)
+atoms = DictionaryLearning(100, 5, 1000, 1e-8, 'lars', 'lasso_lars')
+=======
+=======
+>>>>>>> master
+#load pca data
+Fourier_data = pk.load(open("Fourier_data.pkl", 'rb'))
+X = Fourier_data
+
+#uses the dictionary learning class to transform the data
+
+atoms = DictionaryLearning(100, 1, 1000, 1e-8, 'lars', 'lasso_lars')
+
+>>>>>>> master
+#fit and transform data
+atoms.fit(X)
+
+=======
+
+#uses the dictionary learning class to transform the data
+
+atoms = DictionaryLearning(100, 1, 1000, 1e-8, 'lars', 'lasso_lars')
 
 #fit and transform data
-atoms.fit(X_train)
+atoms.fit(X)
 
-traindata = atoms.transform(X_train)
-
-testdata = atoms.transform(X_test)
+>>>>>>> master
+traindata = atoms.transform(X)
 
 # Pickle atoms
 save_object(atoms, 'atoms.pkl')
 
-print(traindata, '\n\n\n', testdata)
+print(traindata)
+print(traindata.shape)
+
+def save_object(obj, filename):
+    with open(filename, 'wb') as output:  # Overwrites any existing file.
+        pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
