@@ -14,7 +14,7 @@ from scipy import fft
 
 def get_all_features():
     # When on windows it's a backslash slash, on linux its a forward slash
-    traindata = 'DATA/TrainData_Classifier'
+    traindata = 'DATA/TrainData_FeatureExtraction'
     [data, labels, filenames, header_data] = data_read.data_files_load(traindata)
     for i in range(0, (len(data))):
          curfeatures = get_fourier_data(data[i], header_data[i])
@@ -50,20 +50,12 @@ def get_fourier_data(data, header_data):
         else:
             tmp = np.vstack((Fdata, curdata))
             Fdata = tmp
-<<<<<<< HEAD
-
-    Fdata = np.abs(Fdata)
-=======
 
     Fdata = np.abs(Fdata)
 
     Fdata = Fdata[:, 0:round(n_samples / 2)]
     return Fdata
->>>>>>> master
 
-    Fdata = Fdata[:, 0:round(n_samples / 2)]
-    return Fdata
-test
 # For pickling
 def save_object(obj, filename):
     with open(filename, 'wb') as output:  # Overwrites any existing file.
