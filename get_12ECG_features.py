@@ -189,4 +189,17 @@ def get_12ECG_features(data, header_data):
     return features
 
 
-#def get_train_classifier_features():
+def get_train_classifier_features():
+    traindata = pk.load(open("traindata.pkl", 'rb'))
+    pca = pk.load(open("pca.pkl", 'rb'))
+    print(traindata.shape)
+    print(pca.shape)
+    classifier_data = np.hstack((traindata, pca))
+    print(classifier_data.shape)
+    save_object(classifier_data, 'classifier_data.pkl')
+
+
+# For pickling
+def save_object(obj, filename):
+    with open(filename, 'wb') as output:  # Overwrites any existing file.
+        pk.dump(obj, output, pk.HIGHEST_PROTOCOL)

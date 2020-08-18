@@ -3,6 +3,7 @@ import pickle as pk
 from sklearn.decomposition import DictionaryLearning
 from sklearn import datasets
 from sklearn import preprocessing
+import tensorflow as tf
 
 
 # For pickling
@@ -27,6 +28,8 @@ traindata = atoms.transform(X)
 
 print(atoms.components_.shape)
 print(traindata.shape)
+traindata = np.reshape(traindata, (3439, 1200))
+print(traindata.shape)
 
 # Pickle atoms
-save_object(atoms.components_, 'atoms.pkl')
+save_object(traindata, 'traindata.pkl')
