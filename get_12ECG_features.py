@@ -5,7 +5,8 @@ import scipy.io as sio
 import pickle as pk
 from scipy.signal import butter, lfilter
 from scipy import stats
-
+import get_all_Features
+import get_fourier_data
 
 def detect_peaks(ecg_measurements, signal_frequency, gain):
     """
@@ -141,34 +142,8 @@ def findpeaks(data, spacing=1, limit=None):
 
 
 def get_12ECG_features(data, header_data):
-    tmp_hea = header_data[0].split(' ')
-    ptID = tmp_hea[0]
-    num_leads = int(tmp_hea[1])
-    sample_Fs = int(tmp_hea[2])
-    gain_lead = np.zeros(num_leads)
-
-    for ii in range(num_leads):
-        tmp_hea = header_data[ii + 1].split(' ')
-        gain_lead[ii] = int(tmp_hea[2].split('/')[0])
-
-    # for testing, we included the mean age of 57 if the age is a NaN
-    # This value will change as more data is being released
-    for iline in header_data:
-        if iline.startswith('#Age'):
-            tmp_age = iline.split(': ')[1].strip()
-            age = int(tmp_age if tmp_age != 'NaN' else 57)
-        elif iline.startswith('#Sex'):
-            tmp_sex = iline.split(': ')[1]
-            if tmp_sex.strip() == 'Female':
-                sex = 1
-            else:
-                sex = 0
-        elif iline.startswith('#Dx'):
-            label = iline.split(': ')[1].split(',')[0]
-
-    #   Add more features: PCA and Sparse Coding
-
     # PCA
+    X_test = get_all_Features.get_file_features(data, header_data)
     # Load up pca and sc
     pca = pk.load(open("pca.pkl", 'rb'))
     sc = pk.load(open("sc.pkl", 'rb'))
@@ -178,25 +153,26 @@ def get_12ECG_features(data, header_data):
     X_pca_test = pca.transform(X_std_test)
 
     # Sparse Coding
+    X_Fourier = get_fourier_data.get_fourier_data(data, header_data)
     # Load up atoms
     atoms = pk.load(open("atoms.pkl", 'rb'))
 
     # Implement the testing
-    X_sparse_test = atoms.transfrom(X_test)
+    X_sparse_test = atoms.transfrom(X_Fourier)
 
     features = np.hstack([X_pca_test, X_sparse_test])
 
     return features
 
 
-def get_train_classifier_features():
-    traindata = pk.load(open("traindata.pkl", 'rb'))
-    pca = pk.load(open("pca.pkl", 'rb'))
-    print(traindata.shape)
-    print(pca.shape)
-    classifier_data = np.hstack((traindata, pca))
-    print(classifier_data.shape)
-    save_object(classifier_data, 'classifier_data.pkl')
+# def get_train_classifier_features():
+#     traindata = pk.load(open("traindata.pkl", 'rb'))
+#     pca = pk.load(open("pca.pkl", 'rb'))
+#     print(traindata.shape)
+#     print(pca.shape)
+#     classifier_data = np.hstack((traindata, pca))
+#     print(classifier_data.shape)
+#     save_object(classifier_data, 'classifier_data.pkl')
 
 
 # For pickling

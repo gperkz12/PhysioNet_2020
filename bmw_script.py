@@ -10,9 +10,14 @@ get_all_Features.get_all_features()
 ##################################
 #### TEST get_all_Features.py ####
 
+import data_read
+import driver
 import get_12ECG_features
-
-get_12ECG_features.get_train_classifier_features()
+data, header_data = driver.load_challenge_data('DATA/TrainData_Classifier/A0001.mat')
+print(header_data)
+features = get_12ECG_features.get_12ECG_features(data, header_data)
+print(features)
+print(features.shape)
 
 ##################################
 
