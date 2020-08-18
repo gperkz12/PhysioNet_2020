@@ -1,10 +1,18 @@
 
 ##################################
 #### TEST get_all_Features.py ####
-
+"""
 import get_all_Features
 
 get_all_Features.get_all_features()
+"""
+##################################
+##################################
+#### TEST get_all_Features.py ####
+
+import get_12ECG_features
+
+get_12ECG_features.get_train_classifier_features()
 
 ##################################
 

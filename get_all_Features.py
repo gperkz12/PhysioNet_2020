@@ -82,5 +82,3 @@ def get_file_features(data, header_data):
 def save_object(obj, filename):
     with open(filename, 'wb') as output:  # Overwrites any existing file.
         pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
-
-# Try axcept
