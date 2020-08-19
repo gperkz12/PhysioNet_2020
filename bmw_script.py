@@ -1,4 +1,11 @@
+##################################
+#### TEST get_all_Features.py ####
 
+from get_12ECG_features import get_train_classifier_features
+
+get_train_classifier_features()
+
+##################################
 ##################################
 #### TEST get_all_Features.py ####
 """
@@ -9,19 +16,19 @@ get_all_Features.get_all_features()
 ##################################
 ##################################
 #### TEST get_all_Features.py ####
-
+"""
 import data_read
 import driver
 import get_12ECG_features
 import convert_header_data
 
-data, header_data = driver.load_challenge_data('DATA/TrainData_Classifier/A0001.mat')
+data, header_data = driver.load_challenge_data('DATA/TrainData_Classifier')
 header_data = convert_header_data.convert_header_data(header_data)
 features = get_12ECG_features.get_12ECG_features(data, header_data)
 print(features)
 # Should be 1x1220
 print(features.shape)
-
+"""
 ##################################
 
 ##################################

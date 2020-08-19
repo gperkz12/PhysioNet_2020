@@ -1,7 +1,6 @@
 import numpy as np
 import scipy.io as sio
 import pickle as pk
-import get_12ECG_features
 import data_read
 from scipy.signal import butter, lfilter
 from scipy import stats
@@ -14,7 +13,7 @@ from scipy import fft
 
 def get_all_features():
     # When on windows it's a backslash slash, on linux its a forward slash
-    traindata = 'DATA/TrainData_Classifier'
+    traindata = 'DATA/TrainData_FeatureExtraction'
     [data, labels, filenames, header_data] = data_read.data_files_load(traindata)
     for i in range(0, (len(data))):
          curfeatures = get_fourier_data(data[i], header_data[i])
@@ -25,7 +24,7 @@ def get_all_features():
              Fourier_data = tmp
     print(Fourier_data.shape)
 
-    save_object(Fourier_data, 'Fourier_data.pkl')
+    save_object(Fourier_data, 'sparse_fit.pkl')
 
 
     return 0

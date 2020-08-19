@@ -3,8 +3,6 @@ import pickle as pk
 from sklearn.decomposition import DictionaryLearning
 from sklearn import datasets
 from sklearn import preprocessing
-import tensorflow as tf
-
 
 # For pickling
 def save_object(obj, filename):
@@ -12,8 +10,8 @@ def save_object(obj, filename):
         pk.dump(obj, output, pk.HIGHEST_PROTOCOL)
 
 # Load sparse data
-Fourier_data = pk.load(open("Fourier_data.pkl", 'rb'))
-X = Fourier_data
+sparse_fit = pk.load(open("sparse_fit.pkl", 'rb'))
+X = sparse_fit
 
 #uses the dictionary learning class to transform the data
 
@@ -22,14 +20,7 @@ atoms = DictionaryLearning(100, 1, 1000, 1e-8, 'lars', 'lasso_lars')
 #fit and transform data
 atoms.fit(X)
 
-traindata = atoms.transform(X)
-
-
 
 print(atoms.components_.shape)
-print(traindata.shape)
-traindata = np.reshape(traindata, (3439, 1200))
-print(traindata.shape)
-
 # Pickle atoms
-save_object(traindata, 'traindata.pkl')
+save_object(atoms, 'atoms.pkl')
