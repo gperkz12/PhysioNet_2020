@@ -5,7 +5,7 @@ import scipy.io as sio
 import pickle as pk
 from scipy.signal import butter, lfilter
 from scipy import stats
-from get_all_Features import get_flie_features
+from get_all_Features import get_file_features
 from get_fourier_data import get_fourier_data
 # import get_all_Features
 # import get_fourier_data
@@ -146,9 +146,11 @@ def findpeaks(data, spacing=1, limit=None):
 def get_12ECG_features(data, header_data):
     # PCA
     X_test = get_file_features(data, header_data)
-    # Load up pca and sc
-    pca = pk.load(open("pca.pkl", 'rb'))
+    X_test = np.transpose(X_test)
+    
+    # Load up sc and pca
     sc = pk.load(open("sc.pkl", 'rb'))
+    pca = pk.load(open("pca.pkl", 'rb'))
 
     # Implement the testing
     X_std_test = sc.transform(X_test)
@@ -160,26 +162,27 @@ def get_12ECG_features(data, header_data):
     atoms = pk.load(open("atoms.pkl", 'rb'))
 
     # Implement the testing
-    X_sparse_test = atoms.transfrom(X_Fourier)
+    X_sparse_test = atoms.transform(X_Fourier)
+    X_sparse_test = np.reshape(X_sparse_test, (1,1200))
 
     features = np.hstack([X_pca_test, X_sparse_test])
 
     return features
 
 
-def get_train_classifier_features():
-    dir_classifier = 'DATA/TrainData_Classifier'
-    [data, labels, filenames, header_data] = data_read.data_files_load(dir_classifier)
-    for i in range(0, (len(data))):
-        curfeatures = get_12ECG_features(data[i], header_data[i])
-        if i == 0:
-            classifier_data = curfeatures
-        else:
-            tmp = np.column_stack((classifier_data, curfeatures))
-            classifier_data = tmp
-    print(classifier_data.shape)
-    # Should be 3439x1220
-    save_object(classifier_data, 'classifier_data.pkl')
+#def get_train_classifier_features():
+#    dir_classifier = 'DATA/TrainData_Classifier'
+#    [data, labels, filenames, header_data] = data_read.data_files_load(dir_classifier)
+#    for i in range(0, (len(data))):
+#        curfeatures = get_12ECG_features(data[i], header_data[i])
+#        if i == 0:
+#            classifier_data = curfeatures
+#        else:
+#            tmp = np.column_stack((classifier_data, curfeatures))
+#            classifier_data = tmp
+#    print(classifier_data.shape)
+#    # Should be 3439x1220
+#    save_object(classifier_data, 'classifier_data.pkl')
 
 
 # For pickling
