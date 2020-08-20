@@ -25,6 +25,10 @@ pca.fit(X_std_train)
 # Save sc as a pickle file for use in get_12ECG_features
 save_object(sc, 'sc.pkl')
 print(sc)
+print(sc.mean_.shape)
+print(sc.var_.shape)
+print(sc.scale_.shape)
+print(sc.n_samples_seen_)
 # Save pca as a pickle file for use in get_12ECG_features
 print(pca)
 print(pca.components_.shape)

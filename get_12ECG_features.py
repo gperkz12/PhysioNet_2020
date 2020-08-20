@@ -5,8 +5,9 @@ import scipy.io as sio
 import pickle as pk
 from scipy.signal import butter, lfilter
 from scipy import stats
-from get_all_Features import get_file_features
-from get_fourier_data import get_fourier_data
+from get_all_Features_for_driver import get_file_features
+from get_fourier_data_for_driver import get_fourier_data
+import convert_header_data
 # import get_all_Features
 # import get_fourier_data
 
@@ -144,8 +145,11 @@ def findpeaks(data, spacing=1, limit=None):
 
 
 def get_12ECG_features(data, header_data):
+    # Extract age, sex, and lead gains from header data
+    metadata = convert_header_data.convert_header_data(header_data)
+
     # PCA
-    X_test = get_file_features(data, header_data)
+    X_test = get_file_features(data, metadata)
     X_test = np.transpose(X_test)
     
     # Load up sc and pca
@@ -157,7 +161,7 @@ def get_12ECG_features(data, header_data):
     X_pca_test = pca.transform(X_std_test)
 
     # Sparse Coding
-    X_Fourier = get_fourier_data(data, header_data)
+    X_Fourier = get_fourier_data(data, metadata)
     # Load up atoms
     atoms = pk.load(open("atoms.pkl", 'rb'))
 

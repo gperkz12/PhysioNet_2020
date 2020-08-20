@@ -2,6 +2,7 @@
 
 import numpy as np
 import joblib
+import convert_label
 from get_12ECG_features import get_12ECG_features
 
 def run_12ECG_classifier(data,header_data,classes,model):
@@ -14,9 +15,11 @@ def run_12ECG_classifier(data,header_data,classes,model):
     features = np.asarray(get_12ECG_features(data, header_data))
     feats_reshape = features.reshape(1, -1)
     label = model.predict(feats_reshape)
+    label = convert_label.convert_label(label,classes)
     score = model.predict_proba(feats_reshape)
 
     current_label[label] = 1
+    print(current_label)
 
     for i in range(num_classes):
         current_score[i] = np.array(score[0][i])

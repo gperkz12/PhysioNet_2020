@@ -5,7 +5,7 @@
 #### and should be used to train the classification
 #### model.
 ##################################
-
+"""
 import numpy as np
 import data_read
 from get_12ECG_features import get_12ECG_features, save_object
@@ -24,7 +24,7 @@ for i in range(0,30):
 print(classifier_data.shape)
 # Should be 3439x1220
 save_object(classifier_data, 'classifier_data.pkl')
-
+"""
 ##################################
 ##################################
 #### TEST get_all_Features.py ####
@@ -98,4 +98,17 @@ print(test1)
 test2 = get_label.getLabel("A1236")
 print(test2)
 """
+###########################
+
+###########################
+#### TEST get_label.py ####
+
+import convert_label
+
+classes = ['164884008', '164889003', '164909002', '164931005', '270492004', '284470004', '426783006', '429622005', '59118001']
+
+label = ['59118001\n']
+
+newlabel = convert_label.convert_label(label,classes)
+print(newlabel)
 ###########################
