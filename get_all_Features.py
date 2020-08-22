@@ -141,7 +141,7 @@ def findpeaks(data, spacing=1, limit=None):
 
 def get_all_features():
 
-    traindata = 'DATA/TrainData_FeatureExtraction'
+    traindata = '/media/gperkz/KINGSTON/TrainData_FeatureExtraction'
     [data, labels, filenames, header_data] = data_read.data_files_load(traindata)
     for i in range(0, (len(data))):
         curfeatures = get_file_features(data[i], header_data[i])

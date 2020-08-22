@@ -10,10 +10,10 @@ import numpy as np
 import data_read
 from get_12ECG_features import get_12ECG_features, save_object
 
-dir_classifier = 'DATA/TrainData_Classifier'
+dir_classifier = 'Downloads/TrainData_Classifier'
 [data, labels, filenames, header_data] = data_read.data_files_load(dir_classifier)
 #for i in range(0, (len(data))):
-for i in range(0,30):
+for i in range(0, (len(data))):
     curfeatures = get_12ECG_features(data[i], header_data[i])
     if i == 0:
         classifier_data = curfeatures
@@ -28,11 +28,11 @@ save_object(classifier_data, 'classifier_data.pkl')
 ##################################
 ##################################
 #### TEST get_all_Features.py ####
-"""
+
 import get_all_Features
 
 get_all_Features.get_all_features()
-"""
+
 ##################################
 ##################################
 #### TEST get_all_Features.py ####

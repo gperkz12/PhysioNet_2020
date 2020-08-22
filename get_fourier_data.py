@@ -13,7 +13,7 @@ from scipy import fft
 
 def get_all_features():
     # When on windows it's a backslash slash, on linux its a forward slash
-    traindata = 'DATA/TrainData_FeatureExtraction'
+    traindata = '/media/gperkz/KINGSTON/TrainData_FeatureExtraction'
     [data, labels, filenames, header_data] = data_read.data_files_load(traindata)
     for i in range(0, (len(data))):
          curfeatures = get_fourier_data(data[i], header_data[i])
