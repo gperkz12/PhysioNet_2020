@@ -4,6 +4,7 @@ import numpy as np, os, sys, joblib
 from scipy.io import loadmat
 from sklearn.impute import SimpleImputer
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
 from get_12ECG_features import get_12ECG_features
 
 def train_12ECG_classifier(input_directory, output_directory):
@@ -58,7 +59,28 @@ def train_12ECG_classifier(input_directory, output_directory):
     features=imputer.transform(features)
 
     # Train the classifier
-    model = RandomForestClassifier().fit(features,labels)
+    # model = RandomForestClassifier().fit(features,labels)
+    clf_rf = RandomForestClassifier(n_jobs=2)
+
+    # Parameter range for grid search
+    param_grid = {
+    'n_estimators': [2, 4, 8, 16, 32, 64, 128, 256, 512],
+    'max_features': ['auto', 'sqrt', 'log2'],
+    'max_depth' : [2, 4, 8, 16, 32, 64, 128, 256, 512],
+    'criterion' :['gini', 'entropy']
+    }
+    # Grid search
+    CV_rf = GridSearchCV(estimator=clf_rf, param_grid=param_grid, cv= 4)
+    CV_rf.fit(features, labels)
+    CV_rf.best_params_
+
+    model = RandomForestClassifier(max_features=CV_rf.best_params_['max_features'],
+                                 n_estimators= CV_rf.best_params_['n_estimators'],
+                                 max_depth=CV_rf.best_params_['max_depth'],
+                                 criterion=CV_rf.best_params_['criterion'])
+
+    # Retraining based on best parameters
+    model.fit(features, labels)
 
     # Save model.
     print('Saving model...')
