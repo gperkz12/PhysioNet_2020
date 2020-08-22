@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import sys
 
-from driver import load_challenge_data, get_classes
+from driver import load_challenge_data
 
 def data_files_list(input_directory):
     """Get a list of files in the input directory"""

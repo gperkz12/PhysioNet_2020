@@ -1,7 +1,7 @@
 import numpy as np
 import scipy.io as sio
 import pickle as pk
-import data_read
+from data_read import data_files_load
 from scipy.signal import butter, lfilter
 from scipy import stats
 import matplotlib.pyplot as plt
@@ -14,17 +14,29 @@ from scipy import fft
 def get_all_features():
     # When on windows it's a backslash slash, on linux its a forward slash
     traindata = '/media/gperkz/KINGSTON/TrainData_FeatureExtraction'
-    [data, labels, filenames, header_data] = data_read.data_files_load(traindata)
+    [data, labels, filenames, header_data] = data_files_load(traindata)
     for i in range(0, (len(data))):
          curfeatures = get_fourier_data(data[i], header_data[i])
          if i == 0:
              Fourier_data = curfeatures
          else:
+             print(i)
              tmp = np.vstack((Fourier_data, curfeatures))
              Fourier_data = tmp
     print(Fourier_data.shape)
+    Fourier_data1 = Fourier_data[:29739, :]
 
-    save_object(Fourier_data, 'sparse_fit.pkl')
+    Fourier_data2 = Fourier_data[29740:59478, :]
+
+    Fourier_data3 = Fourier_data[59479:89217, :]
+
+    Fourier_data4 = Fourier_data[89218:, :]
+
+    save_object(Fourier_data1, 'sparse_fit1.pkl')
+    save_object(Fourier_data2, 'sparse_fit2.pkl')
+    save_object(Fourier_data3, 'sparse_fit3.pkl')
+    save_object(Fourier_data4, 'sparse_fit4.pkl')
+
 
 
     return 0

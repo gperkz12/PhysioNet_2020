@@ -148,6 +148,7 @@ def get_all_features():
         if i == 0:
             pca_data = curfeatures
         else:
+            print(i)
             tmp = np.column_stack((pca_data, curfeatures))
             pca_data = tmp
     print(pca_data.shape)
